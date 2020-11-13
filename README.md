@@ -8,7 +8,8 @@ It will also be possible to easily extend or modify recipies. For example if you
 - [Framework](#framework)
 
 # Requirements
-Requirements will be here
+* [Jinja 2.11.12+](https://jinja.palletsprojects.com/en/2.11.x/)
+* Flask 1.1.2+
 
 # Framework
-This project will, at least as a starter use [Metro_4](https://metroui.org.ua/)
+* This project will, at least as a starter use [Metro_4](https://metroui.org.ua/)
