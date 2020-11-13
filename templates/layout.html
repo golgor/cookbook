@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+        <!-- Metro 4 -->
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body style="background-image: url({{ url_for('static', filename='img/pexels-mudassir-ali-2680270.jpg') }})">
+        <ul class="h-menu" style="background-color: #A3C2C4">
+            <li><a href="/">Home</a></li>
+            <li><a href="#" class="dropdown-toggle">Products</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="#" class="dropdown-toggle">Windows</a>
+                        <ul class="d-menu" data-role="dropdown">
+                            <li><a href="#">Windows 10</a></li>
+                            <li><a href="#">Windows Server</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">MS-DOS</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Skype</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Office</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Recipies</a></li>
+            <li><a href="/test">Test</a></li>
+        </ul>
+        <div>
+            <div class="grid">
+                <div class="row flex-align-center">
+                    <!-- Total of 12 columns per row, 6 columns wide with offset 3 on each side gives 12 total CENTERED! -->
+                    <div class="cell-8 offset-2">
+                        <div style="background-color: rgb(216, 228, 221); margin-top: 20%; opacity: 0.75;">
+                            {% block main %}{% endblock %}
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Metro 4 -->
+        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    </body>
+</html>

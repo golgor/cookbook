@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-        
-        <!-- Metro 4 -->
-        <title>Coolbok</title>
-    </head>
-    <body>
-        <h1>First page of the cookbook!</h1>
-        <div data-role="cube"></div>
-        <!-- Metro 4 -->
-        <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+    Cookbook
+{% endblock %}
+
+{% block main %}
+    <h1>First page of the cookbook!</h1>
+    <p>
+        This is the first part of my homepage!
+    </p>
+{% endblock %}
