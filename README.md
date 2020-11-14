@@ -13,3 +13,7 @@ It will also be possible to easily extend or modify recipies. For example if you
 
 # Framework
 * This project will, at least as a starter use [Metro_4](https://metroui.org.ua/)
+* Other Frameworks
+  * [Materialize](https://materializecss.com/)
+  * [HTML5 Boilerplate](https://html5boilerplate.com/)
+  * [Semantic UI](https://semantic-ui.com/)
