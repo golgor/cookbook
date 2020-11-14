@@ -3,12 +3,17 @@
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
+        
+        <!-- Metro 4 -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-        <!-- Metro 4 -->
+
+        <!-- My own -->
+        <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }}>
+
         <title>{% block title %}{% endblock %}</title>
     </head>
-    <body style="background-image: url({{ url_for('static', filename='img/pexels-mudassir-ali-2680270.jpg') }})">
+    <body>
         <ul class="h-menu" style="background-color: #A3C2C4">
             <li><a href="/">Home</a></li>
             <li><a href="#" class="dropdown-toggle">Recipies</a>
@@ -32,7 +37,7 @@
                 <div class="row flex-align-center">
                     <!-- Total of 12 columns per row, 6 columns wide with offset 3 on each side gives 12 total CENTERED! -->
                     <div class="cell-8 offset-2">
-                        <div style="background-color: rgb(216, 228, 221); margin-top: 20%; opacity: 0.75;">
+                        <div class="container main">
                             {% block main %}{% endblock %}
                         </div>                    
                     </div>
@@ -43,3 +48,4 @@
         <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
     </body>
 </html>
+

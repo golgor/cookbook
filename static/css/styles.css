@@ -1,0 +1,11 @@
+.main{
+    margin-top: 20%;
+    opacity: 0.75;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color: rgb(216, 228, 221);
+}
+
+body{ 
+	background-image:url('../img/pexels-mudassir-ali-2680270.jpg'); 
+} 
