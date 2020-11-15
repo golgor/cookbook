@@ -1,0 +1,62 @@
+{% extends "base_layout.html" %}
+
+{% block main %}
+<div class="grid">
+    <div class="row">
+        <div class="cell-5">
+            {% block image %}{% endblock %}
+            Sätter en fin bild här
+        </div>
+        <div class="cell-7">
+            <div class="row">
+                <div class="cell">
+                    <h2>
+                        {% block main_heading %}{% endblock %}
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <ul class="group-list horizontal">
+                        {% block summary_row %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    {% block short_info %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell-4" style="background-color: rgb(28, 228, 111);">
+            <div class="row">
+                <div class="cell">
+                    <h5 class="text-center">Prep</h5>
+                    <ul>
+                        {% block prep %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <h5 class="text-center">Ingredients</h5>
+                    <ul>
+                        {% block ingredients %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cell-8" style="background-color: rgb(185, 228, 28);">
+            <div class="row">
+                <div class="cell">
+                    <ul class="step-list">
+                        {% block step_list %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
