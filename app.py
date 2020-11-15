@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request
+from database import insert_ingredient, list_ingredients
 
 app = Flask(__name__)
 
@@ -42,16 +42,23 @@ def ingredients():
     Returns:
         [type]: [description]
     """
+    list_ingredients()
     return render_template("list_items.html", heading="Ingredients")
 
 
-@app.route('/ingredients/add')
+@app.route('/ingredients/add', methods=['GET', 'POST'])
 def add_ingredients():
     """[summary]
 
     Returns:
         [type]: [description]
     """
+    if request.method == 'POST':
+        insert_ingredient(
+            name=request.form.get("name"),
+            type=request.form.get("type"),
+            note=request.form.get("note")
+        )
     return render_template("add_ingredient.html")
 
 
