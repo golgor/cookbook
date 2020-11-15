@@ -22,7 +22,7 @@ def list_recipies():
     Returns:
         [type]: [description]
     """
-    return render_template("list_items.html", heading="Recipies")
+    return render_template("list_recipies.html")
 
 
 @app.route('/recipes/add')
@@ -42,8 +42,10 @@ def ingredients():
     Returns:
         [type]: [description]
     """
-    list_ingredients()
-    return render_template("list_items.html", heading="Ingredients")
+    return render_template(
+        "list_ingredients.html",
+        ingredients=list_ingredients()
+    )
 
 
 @app.route('/ingredients/add', methods=['GET', 'POST'])

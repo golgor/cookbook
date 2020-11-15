@@ -15,4 +15,4 @@ def list_ingredients():
         c = conn.cursor()
         ingredients = c.execute(
             "SELECT * FROM ingredient")
-    print(ingredients.fetchall())
+    return ingredients.fetchall()

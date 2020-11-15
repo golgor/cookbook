@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All Ingredients
+{% endblock %}
+
+{% block main %}
+    <h1>Ingredients</h1>
+    <p>
+        This is the first part where all ingredients is listed.
+    </p>
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Note</th>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients %}
+            <tr>
+                <td>{{ ingredient[0] }}</td>
+                <td>{{ ingredient[1] }}</td>
+                <td>{{ ingredient[2] }}</td>
+                <td>{{ ingredient[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
