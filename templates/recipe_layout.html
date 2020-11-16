@@ -1,86 +1,83 @@
 {% extends "base_layout.html" %}
 
 {% block main %}
-<div class="grid">
-    <div class="row">
-        <div class="cell-5">
-            {#
-                This is where the picture for the recipe will be placed.
-            #}
-            {% block image %}{% endblock %}
+    {% block form_start %}
+    {% endblock %}
+    <div class="grid">
+        <div class="row flex-align-center" style="margin-bottom: 5px; margin-top: 6px;">
+            <div class="cell-sm-5">
+                {#
+                    This is where the picture for the recipe will be placed.
+                #}
+                {% block image %}{% endblock %}
+            </div>
+            <div class="cell-sm-7">
+                <div class="grid">
+                    <div class="row">
+                        <div class="cell-sm">
+                            {#
+                                This is the main heading of the recipe.
+                            #}
+                            {% block main_heading %}{% endblock %}
+                        </div>
+                    </div>
+                    <div class="row flex-align-center">
+                            {#
+                                This is a summary row where some addition information will be
+                                presented, such as difficulty, taste and time consumption.
+                            #}
+                            {% block summary_row %}{% endblock %}
+                    </div>
+                    <div class="row">
+                        <div class="cell-sm">
+                            {#
+                                This is some additional short information about the recipe.
+                                Might not always be needed?
+                            #}
+                            {% block short_info %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cell-7">
-            <div class="row">
-                <div class="cell">
-                    <h2>
-                        {#
-                            This is the main heading of the recipe.
-                        #}
-                        {% block main_heading %}{% endblock %}
-                    </h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cell">
-                    <ul class="group-list horizontal">
-                        {#
-                            This is a summary row where some addition information will be
-                            presented, such as difficulty, taste and time consumption.
-                        #}
-                        {% block summary_row %}{% endblock %}
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cell">
-                    {#
-                        This is some additional short information about the recipe.
-                        Might not always be needed?
-                    #}
-                    {% block short_info %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="cell-4" style="background-color: rgb(28, 228, 111);">
-            <div class="row">
-                <div class="cell">
-                    <h5 class="text-center">Prep</h5>
-                    <ul>
+        <div class="row">
+            <div class="cell-4" style="background-color: rgb(28, 228, 111);">
+                <div class="row">
+                    <div class="cell">
                         {#
                             This is a list of steps that should be done before starting
                             to work with the recipe! Things such as starting the oven...
                         #}
                         {% block prep %}{% endblock %}
-                    </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="cell">
-                    <h5 class="text-center">Ingredients</h5>
-                    <ul>
+                <div class="row">
+                    <div class="cell">
                         {#
                             This is a list of all ingredients.
                         #}
                         {% block ingredients %}{% endblock %}
-                    </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="cell-8" style="background-color: rgb(185, 228, 28);">
-            <div class="row">
-                <div class="cell">
-                    <ul class="step-list">
+            <div class="cell-8" style="background-color: rgb(185, 228, 28);">
+                <div class="row">
+                    <div class="cell">
                         {#
                             This is the main list of steps in the recipe.
                             How to mix/prepare different ingredients.
                         #}
                         {% block step_list %}{% endblock %}
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        {% block submit %}
+        {% endblock %}
+        {% block form_end %}
+        {% endblock %}
     </div>
-</div>
+
+    {% block scripts %}
+    {% endblock %}
 {% endblock %}

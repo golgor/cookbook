@@ -49,17 +49,8 @@
             This is a centered cell where the 'main' content will be located.
         #}
         <div>
-            <div class="grid">
-                <div class="row flex-align-center">
-                    {#
-                        Total of 12 columns per row, 6 columns wide with offset 3 on each side gives 12 total CENTERED!
-                    #}
-                    <div class="cell-8 offset-2">
-                        <div class="container main">
-                            {% block main %}{% endblock %}
-                        </div>                    
-                    </div>
-                </div>
+            <div class="container main">
+                {% block main %}{% endblock %}
             </div>
         </div>
         <!-- Metro 4 -->

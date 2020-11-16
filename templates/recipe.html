@@ -12,16 +12,20 @@
 
 <!-- Main heading of a recipe page -->
 {% block main_heading %}
-    Blomkålspaj med broccoligratäng och köttfärsbullar
+    <h2>
+        Blomkålspaj med broccoligratäng och köttfärsbullar
+    </h2>
 {% endblock %}
 
 <!-- 
 Row with items for how tasty, how difficult the recipe was. Note <li>!
 -->
 {% block summary_row %}
-    <li>Taste</li>
-    <li>Difficulty</li>
-    <li>Time</li>
+    <ul class="group-list horizontal">
+        <li>Taste</li>
+        <li>Difficulty</li>
+        <li>Time</li>
+    </ul>
 {% endblock %}
 
 <!-- 
@@ -37,22 +41,29 @@ Short information about the recipe, will be just under the summary_row
 Preparation cell, to the left of the recipe.
 -->
 {% block prep %}
-    <li>Sätt ungen på 230 grader</li>
-    <li>Ta fram köttfärsen dagen innan</li>
+    <h5 class="text-center">Prep</h5>
+    <ul>
+        <li>Sätt ungen på 230 grader</li>
+        <li>Ta fram köttfärsen dagen innan</li>
+    </ul>
 {% endblock %}
 
 <!-- 
 List with ingredients
 -->
 {% block ingredients %}
-    <li>Test</li>
-    <li>Supertest</li>
+    <h5 class="text-center">Ingredients</h5>
+    <ul>
+        <li>Test</li>
+        <li>Supertest</li>
+    </ul>
 {% endblock %}
 
 <!-- 
 List with all the steps that needs to be done.
 -->
 {% block step_list %}
+<ul class="step-list">
     <li>
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -78,4 +89,12 @@ List with all the steps that needs to be done.
         If you are going to use a passage of Lorem Ipsum, you need to be sure
         there isn't anything embarrassing hidden in the middle of text.
     </li>
+</ul>
+{% endblock %}
+
+<!-- 
+Scripts!
+-->
+{% block scripts %}
+
 {% endblock %}

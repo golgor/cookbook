@@ -1,12 +1,124 @@
-{% extends "base_layout.html" %}
+{% extends "recipe_layout.html" %}
 
+<!-- Title of the page -->
 {% block title %}
     Add recipe
 {% endblock %}
 
-{% block main %}
-    <h1>This is where you add recipies!</h1>
-    <p>
-        Fancy page where you fill in all you need to make a dish. Using a form and Post!
-    </p>
+{% block form_start %}
+    <form action="/recipes/add" method="post">
+{% endblock %}
+
+{% block form_end %}
+    </form>
+{% endblock %}
+
+<!-- Picture of the food! -->
+{% block image %}
+    <div class="form-group">
+        <div class="img-container rounded drop-shadow">
+            <img src={{ url_for('static', filename='img/food.jpg') }}>
+            <div class="image-overlay">
+                <div class="h2">Change picture</div>
+                <p>
+                    Click here to upload a new picture!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- Main heading of a recipe page -->
+{% block main_heading %}
+    <div class="form-group">
+        <input data-role="text" class="metro-input" name="heading" placeholder="Heading">
+    </div>
+{% endblock %}
+
+<!-- 
+Row with items for how tasty, how difficult the recipe was. Note <li>!
+-->
+{% block summary_row %}
+    <div class="cell-sm" style="min-width:100px;">
+        <label>Difficulty</label>
+        <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="difficulty">
+    </div>
+    <div class="cell-sm">
+        <label>Taste</label>
+        <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="taste">
+    </div>
+    <div class="cell-sm">
+        <label>Time</label>
+        <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
+    </div>
+{% endblock %}
+
+<!-- 
+Short information about the recipe, will be just under the summary_row
+-->
+{% block short_info %}
+    <div class="form-group">
+        <textarea data-role="textarea" data-auto-size="false" class="metro-input" name="short_info" placeholder="Heading" style="min-height:70px; height: 85px;"></textarea>
+    </div>
+{% endblock %}
+<!-- 
+Preparation cell, to the left of the recipe.
+-->
+{% block prep %}
+    <li>Sätt ungen på 230 grader</li>
+    <li>Ta fram köttfärsen dagen innan</li>
+{% endblock %}
+
+<!-- 
+List with ingredients
+-->
+{% block ingredients %}
+    <li>Test</li>
+    <li>Supertest</li>
+{% endblock %}
+
+<!-- 
+List with all the steps that needs to be done.
+-->
+{% block step_list %}
+    <li>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        when an unknown printer took a galley of type and scrambled it to make a type
+        specimen book.
+    </li>
+    <li>
+        Contrary to popular belief, Lorem Ipsum is not simply random text.
+        It has roots in a piece of classical Latin literature from 45 BC,
+        making it over 2000 years old.
+    </li>
+    <li>
+        There are many variations of passages of Lorem Ipsum available,
+        but the majority have suffered alteration in some form, by injected
+        humour, or randomised words which don't look even slightly believable.
+        If you are going to use a passage of Lorem Ipsum, you need to be sure
+        there isn't anything embarrassing hidden in the middle of text.
+    </li>
+    <li>
+        There are many variations of passages of Lorem Ipsum available,
+        but the majority have suffered alteration in some form, by injected
+        humour, or randomised words which don't look even slightly believable.
+        If you are going to use a passage of Lorem Ipsum, you need to be sure
+        there isn't anything embarrassing hidden in the middle of text.
+    </li>
+{% endblock %}
+
+{% block submit %}
+    <div class="row" style="margin-bottom: 15px; margin-top: 6px;">
+        <div class="d-flex flex-justify-center">
+            <button class="button primary" style="margin-top: 2%;">Add recipe</button>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- 
+Scripts!
+-->
+{% block scripts %}
+
 {% endblock %}

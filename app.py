@@ -19,10 +19,16 @@ def list_recipies():
     return render_template("list_recipies.html")
 
 
-@app.route('/recipes/add')
+@app.route('/recipes/add', methods=['GET', 'POST'])
 def add_recipies():
     """Route to add recipes to the database.
     """
+    if request.method == 'POST':
+        print(request.form.get("heading"))
+        print(request.form.get("difficulty"))
+        print(request.form.get("taste"))
+        print(request.form.get("time"))
+        print(request.form.get("short_info"))
     return render_template("add_recipe.html")
 
 

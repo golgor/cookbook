@@ -13,8 +13,6 @@ Styling for the div with the main information
 */
 .main{
     margin-top: 20%;
-    padding-top: 3%;
-    padding-bottom: 3%;
     background-color: #EFB06B;
     border-radius: 10px;
 }
