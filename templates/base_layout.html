@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+{#
+    This is the base layout. This setups the structure of the whole
+    page and is used for all html-pages.
+#}
 <html lang="en">
     <head>
         <!-- Required meta tags -->
@@ -14,6 +18,9 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        {#
+            This is the header menu that will let you access all pages.
+        #}
         <ul class="h-menu" style="background-color: #A3C2C4">
             <li><a href="/">Home</a></li>
             <li><a href="#" class="dropdown-toggle">Recipies</a>
@@ -32,10 +39,15 @@
             <li><a href="/test">Test</a></li>
             <li><a href="/test">Search Box</a></li>
         </ul>
+        {#
+            This is a centered cell where the 'main' content will be located.
+        #}
         <div>
             <div class="grid">
                 <div class="row flex-align-center">
-                    <!-- Total of 12 columns per row, 6 columns wide with offset 3 on each side gives 12 total CENTERED! -->
+                    {#
+                        Total of 12 columns per row, 6 columns wide with offset 3 on each side gives 12 total CENTERED!
+                    #}
                     <div class="cell-8 offset-2">
                         <div class="container main">
                             {% block main %}{% endblock %}

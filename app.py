@@ -7,40 +7,28 @@ app = Flask(__name__)
 # RUN 'export FLASK_ENV=development'
 @app.route('/')
 def index():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Index with cards for a variety of recipies.
     """
     return render_template("index.html")
 
 
 @app.route('/recipies')
 def list_recipies():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route to list all recipies in the database in a list/table.
     """
     return render_template("list_recipies.html")
 
 
 @app.route('/recipes/add')
 def add_recipies():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route to add recipes to the database.
     """
     return render_template("add_recipe.html")
 
 
 @app.route('/ingredients')
 def ingredients():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route to list all ingredients currently in the database.
     """
     return render_template(
         "list_ingredients.html",
@@ -50,10 +38,7 @@ def ingredients():
 
 @app.route('/ingredients/add', methods=['GET', 'POST'])
 def add_ingredients():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route to add new ingredients to the database.
     """
     if request.method == 'POST':
         insert_ingredient(
@@ -66,20 +51,14 @@ def add_ingredients():
 
 @app.route('/random')
 def randomize():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route to randomize and show a specific recipe.
     """
     return render_template("recipe.html")
 
 
 @app.route('/test')
 def test():
-    """[summary]
-
-    Returns:
-        [type]: [description]
+    """Route for testing purposes during development.
     """
     return render_template("recipe.html")
 
