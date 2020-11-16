@@ -5,15 +5,97 @@
 {% endblock %}
 
 {% block main %}
-    <h1>This is where you add ingredients!</h1>
-    <form action="/ingredients/add" method="post">
-        <input type="text" name="name" placeholder="Name of ingredient">
-        <select name="type">
-            <option value="vegetable">Vegetable</option>
-            <option value="dairy">Dairy</option>
-            <option value="meat">Meat</option>
-          </select>
-          <input type="text" name="note" placeholder="Special notes">
-        <input type="submit" value="Add">
-    </form>
+    <h1 class="text-center">Add a new ingredient</h1>
+    <div class="d-flex flex-justify-center">
+        <form action="/ingredients/add" method="post">
+            <div class="form-group" style="max-width: 280px">
+                <input type="text" data-role="input" name="name" placeholder="Name of ingredient" pattern="[A-Za-z]+">
+            </div>
+            <div class="form-group" style="max-width: 280px">
+                <input type="text" data-role="input" name="note" placeholder="Special notes">
+            </div>
+            <div class="form-group" style="max-width: 280px">
+                <button type="button" class="button primary" onclick="vegetableButton()" id="vegetable" style="margin-top: 2%;">
+                    <i class="fas fa-carrot" style="padding-right: 10%;"></i>
+                    Vegetables
+                </button>
+                <button type="button" class="button primary" onclick="dairyButton()" id="dairy" style="margin-top: 2%;">
+                    <i class="fas fa-glass-whiskey" style="padding-right: 10%;"></i>
+                    Dairy
+                </button>
+                <button type="button" class="button primary" onclick="meatButton()" id="meat" style="margin-top: 2%;">
+                    <i class="fas fa-bacon" style="padding-right: 10%;"></i>
+                    Meat
+                </button>
+            </div>
+            <div class="form-group">
+                <input class="button primary" type="submit" value="Add" disabled id="submit" style="width: 280px">
+            </div>
+        </form>
+    </div>
+    <script>
+        veg_button = document.querySelector("#vegetable")
+        dairy_button = document.querySelector("#dairy")
+        meat_button = document.querySelector("#meat")
+        submit_button = document.querySelector("#submit")
+        name_field = document.querySelector('[name="name"]')
+        note_field = document.querySelector('[name="note"]')
+
+        name_field.onkeyup = function(){
+            activateSubmit();
+        }
+        note_field.onkeyup = function(){
+            activateSubmit();
+        }
+
+        function activateSubmit(){
+            if(
+                name_field.value != "" &&
+                note_field.value != "" &&
+                (
+                    veg_button.isSelected === true ||
+                    dairy_button.isSelected === true ||
+                    meat_button.isSelected === true
+                )
+            )
+            {
+                submit_button.disabled = false;
+            }
+            else
+            {
+                submit_button.disabled = true;
+            }
+        }
+        function setFocus(button, shadow){
+            //button.style.backgroundColor="#EFB06B";
+            //button.style.border = "3px solid #F2F7F2"
+            button.style.boxShadow = "rgba(0, 0, 0, 0.5) " + shadow + "px 8px 4px 0px";
+            button.isSelected = true;
+        }
+        function unsetFocus(button){
+            //button.style.border = "1px solid transparent"
+            button.style.boxShadow = ""
+            button.isSelected = false;
+        }
+
+        function vegetableButton(){
+            setFocus(veg_button, -2);
+            unsetFocus(dairy_button)
+            unsetFocus(meat_button);
+            activateSubmit();
+        }
+        function dairyButton(){
+            unsetFocus(veg_button);
+            setFocus(dairy_button, 0)
+            unsetFocus(meat_button);
+            activateSubmit();
+        }
+        function meatButton(){
+
+            unsetFocus(veg_button);
+            unsetFocus(dairy_button)
+            setFocus(meat_button, 2);
+            activateSubmit();
+        }
+    </script>
 {% endblock %}

@@ -1,11 +1,39 @@
+/*
+{
+    "Pale Cerulean":"91bbde",
+    "Carolina Blue":"629fd0",
+    "Middle Yellow Red:"EFB06B"
+    "Mint Cream":"f2f7f2",
+    "Space Cadet":"263554"
+}
+*/
+
+/*
+Styling for the div with the main information
+*/
 .main{
     margin-top: 20%;
-    opacity: 0.75;
     padding-top: 3%;
     padding-bottom: 3%;
-    background-color: rgb(216, 228, 221);
+    background-color: #EFB06B;
+    border-radius: 10px;
 }
 
-body{ 
-	background-image:url('../img/pexels-mudassir-ali-2680270.jpg'); 
-} 
+/*
+Classes for different colors!
+*/
+.middle-yellow-red{
+    background-color: #EFB06B;
+}
+
+.pale-cerulean{
+    background-color: #91BBDE;
+}
+
+.carolina-blue{
+    background-color: #629FD0
+}
+
+.text-color{
+    color: #263554;
+}

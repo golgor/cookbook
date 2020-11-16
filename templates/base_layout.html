@@ -14,14 +14,16 @@
 
         <!-- My own -->
         <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }}>
+    
+        <script src="https://kit.fontawesome.com/c529a8d840.js" crossorigin="anonymous"></script>
 
         <title>{% block title %}{% endblock %}</title>
     </head>
-    <body>
+    <body class="carolina-blue">
         {#
             This is the header menu that will let you access all pages.
         #}
-        <ul class="h-menu" style="background-color: #A3C2C4">
+        <ul class="h-menu middle-yellow-red">
             <li><a href="/">Home</a></li>
             <li><a href="#" class="dropdown-toggle">Recipies</a>
                 <ul class="d-menu" data-role="dropdown">
@@ -37,7 +39,11 @@
             </li>
             <li><a href="/random">Randomize</a></li>
             <li><a href="/test">Test</a></li>
-            <li><a href="/test">Search Box</a></li>
+            <li>
+                <form>
+                    <input type="text" data-role="input" data-search-button="true">
+                </form>
+            </li>
         </ul>
         {#
             This is a centered cell where the 'main' content will be located.
