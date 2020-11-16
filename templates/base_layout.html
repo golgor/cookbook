@@ -16,7 +16,9 @@
         <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }}>
     
         <script src="https://kit.fontawesome.com/c529a8d840.js" crossorigin="anonymous"></script>
-
+        {% block base_top_scripts %}
+        
+        {% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body class="carolina-blue">
@@ -54,6 +56,8 @@
             </div>
         </div>
         <!-- Metro 4 -->
+        {% block base_bottom_scripts %}
+        {% endblock %}
         <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
     </body>
 </html>

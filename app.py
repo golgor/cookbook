@@ -29,6 +29,7 @@ def add_recipies():
         print(request.form.get("taste"))
         print(request.form.get("time"))
         print(request.form.get("short_info"))
+        print(request.form.getlist("prep_input"))
     return render_template("add_recipe.html")
 
 

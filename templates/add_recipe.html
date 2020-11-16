@@ -1,5 +1,24 @@
 {% extends "recipe_layout.html" %}
 
+{% block base_top_scripts %}
+<script>
+    var append_button = [
+        {
+            html: "<i class='fas fa-plus'></i>",
+            cls: "fg-blue",
+            onclick: "append_item"
+        }
+    ]
+    var remove_button = [
+        {
+            html: "<i class='fas fa-times'></i>",
+            cls: "fg-red",
+            onclick: "remove_item"
+        }
+    ]
+</script>
+{% endblock %}
+
 <!-- Title of the page -->
 {% block title %}
     Add recipe
@@ -65,16 +84,20 @@ Short information about the recipe, will be just under the summary_row
 Preparation cell, to the left of the recipe.
 -->
 {% block prep %}
-    <li>Sätt ungen på 230 grader</li>
-    <li>Ta fram köttfärsen dagen innan</li>
+    <h5>Preparations</h5>
+    <ul class="items-list" id="prep_ul">
+        <input type="text" data-role="input" data-clear-button="false" data-custom-buttons="append_button" name="prep_input" placeholder="Add new step">
+    </ul>
+
 {% endblock %}
 
 <!-- 
 List with ingredients
 -->
 {% block ingredients %}
-    <li>Test</li>
-    <li>Supertest</li>
+    <h5>Ingredients</h5>
+    <ul class="items-list" id="ingredient_ul">
+    </ul>
 {% endblock %}
 
 <!-- 
@@ -109,9 +132,9 @@ List with all the steps that needs to be done.
 {% endblock %}
 
 {% block submit %}
-    <div class="row" style="margin-bottom: 15px; margin-top: 6px;">
+    <div class="cell">
         <div class="d-flex flex-justify-center">
-            <button class="button primary" style="margin-top: 2%;">Add recipe</button>
+            <button class="button primary large shadowed" style="margin: 20px; width: 30%">Add recipe</button>
         </div>
     </div>
 {% endblock %}
@@ -119,6 +142,48 @@ List with all the steps that needs to be done.
 <!-- 
 Scripts!
 -->
-{% block scripts %}
+{% block base_bottom_scripts %}
+<script>
+    prep_ul = document.querySelector("#prep_ul")
 
+    // Creating a new input node according to below (input element from Metro_4):
+    // <input type="text" data-role="input" data-clear-button="false" data-custom-buttons="remove_button" id="prep_input">
+    function create_input(text){
+        let element = document.createElement("input")
+        element.type = "text";
+        element.setAttribute("data-role", "input");
+        element.setAttribute("data-clear-button", "false");
+        element.setAttribute("data-custom-buttons", "remove_button");
+        element.name = "prep_input";
+        //element.placeholder = "Add new stuff";
+        element.value = text;
+        return element;
+    }
+
+    // this refers to the actual button, but in this case we want to remove the div containing both the button and the actual text field.
+    function remove_item(){
+        this.parentElement.parentElement.remove()
+    }
+
+    // Append a new LI item to the UL
+    function append_item(){
+        // this refers to the button that is pressed, the parent of this button has a sibling which is the actual input-node.
+        // Get the text from this (the current input field) and set it to the newly created input field.
+        text = this.parentElement.previousSibling.value;
+
+        // Remove the text in this, text will be "moved" to the LI under it.
+        this.parentElement.previousSibling.value = "";
+
+        // Set focus to the input field on top. Easier to append more LIs
+        this.parentElement.previousSibling.focus();
+
+        // function to create a new input node
+        input = create_input(text);
+
+        // Append the new node to the UL. Inserting before childElementCount would put the new element in the bottom.
+        // We want to put the new element above "this" but under previously created inputs, thus -1.
+        prep_ul.insertBefore(input, prep_ul.childNodes[prep_ul.childElementCount-1]);
+    }
+
+</script>
 {% endblock %}

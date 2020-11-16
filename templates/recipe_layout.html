@@ -4,7 +4,7 @@
     {% block form_start %}
     {% endblock %}
     <div class="grid">
-        <div class="row flex-align-center" style="margin-bottom: 5px; margin-top: 6px;">
+        <div class="row flex-align-center" style="margin-top: 6px;">
             <div class="cell-sm-5">
                 {#
                     This is where the picture for the recipe will be placed.
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="cell-4" style="background-color: rgb(28, 228, 111);">
+            <div class="cell-4">
                 <div class="row">
                     <div class="cell">
                         {#
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cell-8" style="background-color: rgb(185, 228, 28);">
+            <div class="cell-8">
                 <div class="row">
                     <div class="cell">
                         {#
@@ -72,12 +72,11 @@
                 </div>
             </div>
         </div>
-        {% block submit %}
-        {% endblock %}
+        <div class="row" style="margin-bottom: 6px;">
+            {% block submit %}
+            {% endblock %}
+        </div>
         {% block form_end %}
         {% endblock %}
     </div>
-
-    {% block scripts %}
-    {% endblock %}
 {% endblock %}
