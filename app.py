@@ -12,7 +12,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/recipies')
+@app.route('/recipies/list')
 def list_recipies():
     """Route to list all recipies in the database in a list/table.
     """
@@ -30,10 +30,10 @@ def add_recipies():
         print(request.form.get("time"))
         print(request.form.get("short_info"))
         print(request.form.getlist("prep_input"))
-    return render_template("add_recipe.html")
+    return render_template("add_recipe.html", ingredients=list_ingredients())
 
 
-@app.route('/ingredients')
+@app.route('/ingredients/list')
 def ingredients():
     """Route to list all ingredients currently in the database.
     """

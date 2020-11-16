@@ -9,7 +9,7 @@
     <p>
         This is the first part where all ingredients is listed.
     </p>
-    <table class="table cell-border striped row-hover">
+    <table class="table" data-role="table">
         <thead>
             <th>#</th>
             <th>Name</th>
@@ -19,10 +19,10 @@
         <tbody>
             {% for ingredient in ingredients %}
             <tr>
-                <td>{{ ingredient[0] }}</td>
-                <td>{{ ingredient[1] }}</td>
-                <td>{{ ingredient[2] }}</td>
-                <td>{{ ingredient[3] }}</td>
+                <td>{{ ingredient["id"] }}</td>
+                <td>{{ ingredient["name"] }}</td>
+                <td>{{ ingredient["type"] }}</td>
+                <td>{{ ingredient["note"] }}</td>
             </tr>
             {% endfor %}
         </tbody>
