@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from database import insert_ingredient, get_ingredients_from_db, get_ingredient_subset_from_db
+from database import *
 
 
 app = Flask(__name__)
@@ -26,12 +26,13 @@ def add_recipies():
     """Route to add recipes to the database.
     """
     if request.method == 'POST':
-        print(request.form.get("heading"))
-        print(request.form.get("difficulty"))
-        print(request.form.get("taste"))
-        print(request.form.get("time"))
-        print(request.form.get("short_info"))
-        print(request.form.getlist("prep_input"))
+        print(f"Heading: {request.form.get('heading')}")
+        print(f"Difficulty: {request.form.get('difficulty')}")
+        print(f"Taste: {request.form.get('taste')}")
+        print(f"Time: {request.form.get('time')}")
+        print(f"Short_info: {request.form.get('short_info')}")
+        print(f"Prep_input: {request.form.getlist('prep_input')}")
+        print(f"Ingredient_input: {request.form.getlist('ingredient_input')}")
     return render_template("add_recipe.html")
 
 
@@ -51,6 +52,16 @@ def ingredients():
     """
     query = request.args.get("q")
     ingredients = get_ingredient_subset_from_db(query)
+    return jsonify(ingredients)
+
+
+@app.route('/ingredients/check')
+def check_ingredients():
+    """Route to list all ingredients currently in the database.
+    """
+    query = request.args.get("q")
+    print(f"Query recieved: {query}")
+    ingredients = check_ingredient_from_db(query)
     return jsonify(ingredients)
 
 
