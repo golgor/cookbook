@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
-from database import insert_ingredient, list_ingredients
+from flask import Flask, render_template, request, jsonify
+from database import insert_ingredient, get_ingredients_from_db, get_ingredient_subset_from_db
+
 
 app = Flask(__name__)
+app.config["JSON_AS_ASCII"] = False
 
 
 # RUN 'export FLASK_ENV=development'
@@ -30,17 +32,26 @@ def add_recipies():
         print(request.form.get("time"))
         print(request.form.get("short_info"))
         print(request.form.getlist("prep_input"))
-    return render_template("add_recipe.html", ingredients=list_ingredients())
+    return render_template("add_recipe.html")
 
 
 @app.route('/ingredients/list')
-def ingredients():
+def list_ingredients():
     """Route to list all ingredients currently in the database.
     """
     return render_template(
         "list_ingredients.html",
-        ingredients=list_ingredients()
+        ingredients=get_ingredients_from_db()
     )
+
+
+@app.route('/ingredients')
+def ingredients():
+    """Route to list all ingredients currently in the database.
+    """
+    query = request.args.get("q")
+    ingredients = get_ingredient_subset_from_db(query)
+    return jsonify(ingredients)
 
 
 @app.route('/ingredients/add', methods=['GET', 'POST'])
