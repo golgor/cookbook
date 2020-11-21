@@ -21,7 +21,7 @@
                             {% block main_heading %}{% endblock %}
                         </div>
                     </div>
-                    <div class="row flex-align-center">
+                    <div class="row">
                             {#
                                 This is a summary row where some addition information will be
                                 presented, such as difficulty, taste and time consumption.
@@ -36,6 +36,9 @@
                             #}
                             {% block short_info %}{% endblock %}
                         </div>
+                    </div>
+                    <div class="row">
+                        {% block prep_and_ingredient_buttons %}{% endblock %}
                     </div>
                 </div>
             </div>
