@@ -72,8 +72,9 @@ def add_ingredients():
     if request.method == 'POST':
         insert_ingredient(
             name=request.form.get("name"),
-            type=request.form.get("type"),
-            note=request.form.get("note")
+            ingredient_type=request.form.get("type"),
+            note=request.form.get("note"),
+            unit=request.form.get("unit")
         )
     return render_template("add_ingredient.html")
 
