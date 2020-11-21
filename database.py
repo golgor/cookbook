@@ -9,13 +9,13 @@ _all_ = [
 ]
 
 
-def insert_ingredient(name, ingredient_type, note, unit):
+def insert_ingredient(name, ingredient_type, note):
     print(ingredient_type)
     with sqlite3.connect('cookbook.db') as conn:
         c = conn.cursor()
         c.execute(
-            "INSERT INTO ingredient (name, type, note, unit) VALUES (?, ?, ?, ?)",
-            (name, ingredient_type, note, unit)
+            "INSERT INTO ingredient (name, type, note) VALUES (?, ?, ?)",
+            (name, ingredient_type, note)
         )
 
 

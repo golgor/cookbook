@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from database import *
+import database as db
 
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def list_ingredients():
     """
     return render_template(
         "list_ingredients.html",
-        ingredients=get_ingredients_from_db()
+        ingredients=db.get_ingredients_from_db()
     )
 
 
@@ -51,7 +51,7 @@ def ingredients():
     """Route to list all ingredients currently in the database.
     """
     query = request.args.get("q")
-    ingredients = get_ingredient_subset_from_db(query)
+    ingredients = db.get_ingredient_subset_from_db(query)
     return jsonify(ingredients)
 
 
@@ -61,7 +61,7 @@ def check_ingredients():
     """
     query = request.args.get("q")
     print(f"Query recieved: {query}")
-    ingredients = check_ingredient_from_db(query)
+    ingredients = db.check_ingredient_from_db(query)
     return jsonify(ingredients)
 
 
@@ -70,11 +70,10 @@ def add_ingredients():
     """Route to add new ingredients to the database.
     """
     if request.method == 'POST':
-        insert_ingredient(
+        db.insert_ingredient(
             name=request.form.get("name"),
             ingredient_type=request.form.get("type"),
             note=request.form.get("note"),
-            unit=request.form.get("unit")
         )
     return render_template("add_ingredient.html")
 
