@@ -215,10 +215,26 @@ Scripts!
         Metro.dialog.open('#stepsDialogBox');
     }
 
+    function create_hidden_input(name, value){
+        //<input type="hidden" value="None" id="ingredient_type" name="type">
+        // ingredient_input
+        input = document.createElement('input');
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        return input;
+    }
+
     function add_prep_step(){
         // Function that executes when you press the 'add'-button for the preps
         text = $("#prepInputBox").val();
         list_item = create_list_element(text)
+
+        hidden_input = create_hidden_input(
+                name="prep_input",
+                value="{'text':" + text + "}"
+            )
+        list_item.appendChild(hidden_input);
         $("#prep_ul").append(list_item);
     }
 
@@ -249,10 +265,18 @@ Scripts!
                 ingredient_name, {"amount":$("#amount_spinner").val(), "unit":$("#unit_selector").val()}
             );
 
+            // Create a hidden input for all list items so they will be submitted.
+            hidden_input = create_hidden_input(
+                name="ingredient_input",
+                value="{'name':" + ingredient_name + ",'amount':" + $("#amount_spinner").val() + ", 'unit':" + $("#unit_selector").val() + "}"
+            )
+
+            list_item.appendChild(hidden_input);
+
             // Must use [0] as $("#ingredient_ul") returns a list with only one value
-            $("#ingredient_ul")[0].append(list_item)
+            $("#ingredient_ul")[0].append(list_item);
             
-            // Clear the input box
+            // Clear the input box        
             $("#ingredientInputBox").val("");
         }
         else{
