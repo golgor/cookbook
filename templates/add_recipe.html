@@ -35,7 +35,8 @@
 <!-- Main heading of a recipe page -->
 {% block main_heading %}
     <div class="form-group">
-        <input data-role="text" class="metro-input" name="heading" placeholder="Heading">
+        <p>Title:</p>
+        <input data-role="text" class="metro-input" name="The title of your recipe" placeholder="Heading">
     </div>
 {% endblock %}
 
@@ -44,15 +45,15 @@ Row with items for how tasty, how difficult the recipe was. Note <li>!
 -->
 {% block summary_row %}
     <div class="cell-sm" style="min-width:100px;">
-        <label>Difficulty</label>
+        <p>Difficulty:</p>
         <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="difficulty">
     </div>
     <div class="cell-sm">
-        <label>Taste</label>
+        <p>Taste:</p>
         <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="taste">
     </div>
     <div class="cell-sm">
-        <label>Time</label>
+        <p>Time:</p>
         <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
     </div>
 {% endblock %}
@@ -62,7 +63,8 @@ Short information about the recipe, will be just under the summary_row
 -->
 {% block short_info %}
     <div class="form-group">
-        <textarea data-role="textarea" data-auto-size="false" class="metro-input" name="short_info" placeholder="Heading" style="min-height:70px; height: 85px;"></textarea>
+        <p>Short info:</p>
+        <textarea data-role="textarea" data-auto-size="false" class="metro-input" name="short_info" placeholder="Short information about the recipe" style="min-height:70px; height: 85px;"></textarea>
     </div>
 {% endblock %}
 
@@ -70,24 +72,16 @@ Short information about the recipe, will be just under the summary_row
 Cell for buttons to add prep steps or ingredients.
 -->
 {% block prep_and_ingredient_buttons %}
-<!--
-<div class="cell-sm">
-        <button type="button" class="button primary" onclick="open_dialog_box()">Open dialog</button>
-</div>
-<div class="cell-sm">
-        <button type="button" class="button primary" onclick="open_dialog_box()">Open dialog</button>
-</div>
--->
 
-<div class="cell-sm" style="display:flex;justify-content:center">
-    <button type="button" class="button primary large" onclick="open_prep_dialog()">Add preparation step</button>
-</div>
-<div class="cell-sm" style="display:flex;justify-content:center">
-    <button type="button" class="button primary large" onclick="open_ingredient_dialog()">Add ingredient</button>
-</div>
-<div class="cell-sm" style="display:flex;justify-content:center">
-    <button type="button" class="button primary large" onclick="open_steps_dialog()">Add step</button>
-</div>
+    <div class="cell-sm" style="display:flex;justify-content:center">
+        <button type="button" class="button primary large" onclick="open_prep_dialog()">Add preparation step</button>
+    </div>
+    <div class="cell-sm" style="display:flex;justify-content:center">
+        <button type="button" class="button primary large" onclick="open_ingredient_dialog()">Add ingredient</button>
+    </div>
+    <div class="cell-sm" style="display:flex;justify-content:center">
+        <button type="button" class="button primary large" onclick="open_steps_dialog()">Add step</button>
+    </div>
 
 {% endblock %}
 <!-- 
@@ -102,7 +96,7 @@ Preparation cell, to the left of the recipe.
             </div>
         </div>
         <div class="dialog-actions">
-            <button class="button js-dialog-close" onclick="add_prep_step()">Add step</button>
+            <button class="button js-dialog-close" onclick="add_prep_step()">Add</button>
             <button class="button primary js-dialog-close">Cancel</button>
         </div>
     </div>
@@ -157,7 +151,7 @@ List with ingredients
             </div>
         </div>
         <div class="dialog-actions">
-            <button class="button js-dialog-close" onclick="check_ingredient()">Add ingredient</button>
+            <button class="button js-dialog-close" onclick="check_ingredient()">Add</button>
             <button class="button primary js-dialog-close">Close</button>
         </div>
     </div>
@@ -169,33 +163,26 @@ List with ingredients
 
 <!-- 
 List with all the steps that needs to be done.
+
+
 -->
 {% block step_list %}
-    <li>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book.
-    </li>
-    <li>
-        Contrary to popular belief, Lorem Ipsum is not simply random text.
-        It has roots in a piece of classical Latin literature from 45 BC,
-        making it over 2000 years old.
-    </li>
-    <li>
-        There are many variations of passages of Lorem Ipsum available,
-        but the majority have suffered alteration in some form, by injected
-        humour, or randomised words which don't look even slightly believable.
-        If you are going to use a passage of Lorem Ipsum, you need to be sure
-        there isn't anything embarrassing hidden in the middle of text.
-    </li>
-    <li>
-        There are many variations of passages of Lorem Ipsum available,
-        but the majority have suffered alteration in some form, by injected
-        humour, or randomised words which don't look even slightly believable.
-        If you are going to use a passage of Lorem Ipsum, you need to be sure
-        there isn't anything embarrassing hidden in the middle of text.
-    </li>
+    <div class="dialog" data-role="dialog" id="stepsDialogBox">
+        <div class="dialog-title">Add new step</div>
+        <div class="dialog-content">
+            <div class="form-group">
+                <p>Short info:</p>
+                <textarea data-role="textarea" data-auto-size="false" class="metro-input" placeholder="Describe your step" style="min-height:70px; height: 85px;" id="stepsInputBox"></textarea>
+            </div>
+        </div>
+        <div class="dialog-actions">
+            <button class="button js-dialog-close" onclick="add_recipe_step()">Add</button>
+            <button class="button primary js-dialog-close">Cancel</button>
+        </div>
+    </div>
+    <h5>Steps</h5>
+    <ul class="step-list" id="recipeStepList">
+    </ul>
 {% endblock %}
 
 {% block submit %}
@@ -212,6 +199,7 @@ Scripts!
 {% block base_bottom_scripts %}
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
+    steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh", ]
     function open_ingredient_dialog(){
         // Opens up the dialog for adding ingredients
         Metro.dialog.open('#ingredientsDialogBox');
@@ -223,44 +211,36 @@ Scripts!
     }
 
     function open_steps_dialog(){
-        alert("Not implemented yet!");
+        // Opens up the dialog for adding steps
+        Metro.dialog.open('#stepsDialogBox');
     }
 
     function add_prep_step(){
+        // Function that executes when you press the 'add'-button for the preps
         text = $("#prepInputBox").val();
         list_item = create_list_element(text)
         $("#prep_ul").append(list_item);
     }
 
-    function create_span(span_class, text=""){
-        let span = document.createElement("span");
-        span.className = span_class;
-        if (text != ""){
-            span.textContent = text;
-        }
-        return span;
-    }
+    function add_recipe_step(){
+        // Function that executes when you press the 'add'-button for the steps
+        text = $("#stepsInputBox").val();
+        $("#stepsInputBox").val("");
 
-    function add_remove_button(element){
-        remove_button = create_span("second-action fas fa-times fg-red");
-        remove_button.onclick = function() { console.log(this.parentElement.remove()); };
-        element.appendChild(remove_button);
-    }
+        list_item = document.createElement("li");
 
-    function create_list_element(label, second_label={}){
-        // Creating a list item
-        let element = document.createElement("li");
+        heading = document.createElement("h4");
+        count = $("#recipeStepList")[0].childElementCount;
+        heading.textContent = steps_array[count] + " step";
 
-        // Creating a span for 'label'. If list-item should be an ingredient, also put amount and unit as second-label
-        element.appendChild(create_span("label", label))
+        content = document.createElement("p");
+        content.textContent = text;
 
-        if (Object.entries(second_label).length != 0){
-            element.appendChild(create_span("second-label", second_label.amount + " " + second_label.unit));
-        }
-
-        // Add a button that enables it to remove the list-item
-        add_remove_button(element);
-        return element;
+        list_item.appendChild(heading);
+        list_item.appendChild(content);
+        $("#recipeStepList").append(
+            list_item
+        );
     }
 
     function ingredient_callback_ok(response){
@@ -307,6 +287,37 @@ Scripts!
             })
         }
     })
+
+    function create_span(span_class, text=""){
+        let span = document.createElement("span");
+        span.className = span_class;
+        if (text != ""){
+            span.textContent = text;
+        }
+        return span;
+    }
+
+    function add_remove_button(element){
+        remove_button = create_span("second-action fas fa-times fg-red");
+        remove_button.onclick = function() { console.log(this.parentElement.remove()); };
+        element.appendChild(remove_button);
+    }
+
+    function create_list_element(label, second_label={}){
+        // Creating a list item
+        let element = document.createElement("li");
+
+        // Creating a span for 'label'. If list-item should be an ingredient, also put amount and unit as second-label
+        element.appendChild(create_span("label", label))
+
+        if (Object.entries(second_label).length != 0){
+            element.appendChild(create_span("second-label", second_label.amount + " " + second_label.unit));
+        }
+
+        // Add a button that enables it to remove the list-item
+        add_remove_button(element);
+        return element;
+    }
 
     function submit_form(){
         document.getElementById("ingredientForm").submit();
