@@ -1,0 +1,199 @@
+{% extends "base_layout.html" %}
+
+{% block base_top_scripts %}
+
+{% endblock %}
+
+{% block title %}
+    Add recipe
+{% endblock %}
+
+{% block main %}
+<form>
+    <div class="grid">
+        <!-- Heading -->
+        <div class="row">
+            <div class="cell">
+                <h1 class="text-center">Add a new ingredient</h1>
+            </div>
+        </div>
+        <!-- Middle row with inputs -->
+        <div class="row">
+            <!-- All inputs -->
+            <div class="cell">
+                <!-- Title input -->
+                <div class="row">
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="metro-input">
+                        </div>
+                    </div>
+                </div>
+                <!-- Spinners with difficulty, taste and time -->
+                <div class="row">
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="difficulty">
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Taste</label>
+                            <input type="text" data-role="spinner" data-min-value="0" data-max-value="5" name="difficulty">
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
+                        </div>
+                    </div>
+                </div>
+                <!-- Buttons for opening dialogs -->
+                <div class="row">
+                    <div class="cell" style="display:flex;justify-content:center">
+                        <button type="button" class="button primary large" style="width: 8em;" id="openPrepDialog">Add prep</button>
+                    </div>
+                    <div class="cell" style="display:flex;justify-content:center">
+                        <button type="button" class="button primary large" style="width: 8em;" id="openIngredientDialog">Add ingredient</button>
+                    </div>
+                    <div class="cell" style="display:flex;justify-content:center">
+                        <button type="button" class="button primary large" style="width: 8em;" id="openRecipeStepDialog">Add step</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side with lists -->
+            <div class="cell">
+                <div class="row">
+                    <div class="cell">
+                        <h1 class="text-center">Preparations</h1>
+                        <ul>
+                            <li>Prep 1</li>
+                            <li>Prep 2</li>
+                            <li>Prep 3</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell">
+                        <h1 class="text-center">Ingredients</h1>
+                        <ul>
+                            <li>Ingredient 1</li>
+                            <li>Ingredient 2</li>
+                            <li>Ingredient 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row with recipe steps -->
+        <div class="row">
+            <div class="cell">
+                <h1 class="text-center">Recipe steps</h1>
+                <ul class="step-list">
+                    <li>Step 1</li>
+                    <li>Step 2</li>
+                    <li>Step 3</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Row with submit button -->
+        <div class="row">
+            <div class="cell" style="display:flex;justify-content:center">
+                <button type="button" class="button primary large shadowed" style="margin: 20px; width: 30%" onClick="submit_form()">Add recipe</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Dialog for adding Preparatory steps -->
+<div class="dialog" data-role="dialog" id="prepsDialogBox">
+    <div class="dialog-title">Add new preparation step</div>
+    <div class="dialog-content">
+        <div class="form-group">
+            <input type="text" data-role="input" id="prepInputBox" placeholder="Prep description">
+        </div>
+    </div>
+    <div class="dialog-actions">
+        <button class="button js-dialog-close" id="addPrepStepFromDialogBox">Add</button>
+        <button class="button primary js-dialog-close">Cancel</button>
+    </div>
+</div>
+
+<!-- Dialog for adding ingredients -->
+<div class="dialog" data-role="dialog" id="ingredientsDialogBox">
+    <div class="dialog-title">Add new ingredient</div>
+    <div class="dialog-content">
+        <div class="form-group">
+            <div class="row">
+                <div class="cell">
+                    <input type="text" data-role="input" id="ingredientInputBox" placeholder="Ingredient name" data-autocomplete="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <p id="amount_unit">Amount:</p>
+                    <input type="text" data-role="spinner" data-min-value="0" name="difficulty" id="amount_spinner">
+                </div>
+                <div class="cell">
+                    <div class="form-group" style="max-width: 280px">
+                        <p>Unit of measurement:</p>
+                        <select data-role="select" name="unit" placeholder="Special notes" id="unit_selector">
+                            <optgroup label="Volume">
+                                <option value="l">Liters</option>
+                                <option value="dl">Deciliters</option>
+                                <option value="cl">Centiliters</option>
+                            </optgroup>
+                            <optgroup label="Mass">
+                                <option value="kg">Kilogram</option>
+                                <option value="hg">Hektogram</option>
+                                <option value="g">Gram</option>
+                            </optgroup>
+                            <optgroup label="Common measures">
+                                <option value="tbsp">Tablespoon (15ml)</option>
+                                <option value="tsp">Teaspoon (5ml)</option>
+                                <option value="pcs">Pieces</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-actions">
+        <button class="button" id="addIngredientFromDialogBox">Add</button>
+        <button class="button primary js-dialog-close">Close</button>
+    </div>
+</div>
+
+<!-- Dialog for adding main recipe steps -->
+<div class="dialog" data-role="dialog" id="stepsDialogBox">
+    <div class="dialog-title">Add new recipe step</div>
+    <div class="dialog-content">
+        <div class="form-group">
+            <p>Short info:</p>
+            <textarea data-role="textarea" data-auto-size="false" class="metro-input" placeholder="Describe your step" style="min-height:70px; height: 85px;" id="stepsInputBox"></textarea>
+        </div>
+    </div>
+    <div class="dialog-actions">
+        <button class="button js-dialog-close" id="addRecipeStepFromDialogBox">Add</button>
+        <button class="button primary js-dialog-close">Cancel</button>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{url_for('static', filename='scripts/dialog_actions.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='scripts/list_actions.js')}}"></script>
+<script type="text/javascript">
+
+    steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh"]
+
+    document.addEventListener("DOMContentLoaded", function() { 
+        addEventListeners();
+    });
+
+</script>
+
+{% endblock %}

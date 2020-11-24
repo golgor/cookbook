@@ -1,4 +1,4 @@
-{% extends "recipe_layout.html" %}
+{% extends "base_layout.html" %}
 
 {% block base_top_scripts %}
 
@@ -199,7 +199,7 @@ Scripts!
 {% block base_bottom_scripts %}
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
-    steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh", ]
+    steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh"]
     function open_ingredient_dialog(){
         // Opens up the dialog for adding ingredients
         Metro.dialog.open('#ingredientsDialogBox');
@@ -299,12 +299,11 @@ Scripts!
     // Append a new LI item to the UL for ingredients. Values need to be verified against the database first.
     // Using an Ajax-call to check the value in the text input when trying to add the new LI.
     $("#ingredientInputBox").keyup(function(event){
-        input_el = Metro.getPlugin("#ingredientInputBox",'input');
-
         if (event.keyCode === 13) {
             check_ingredient();
         }
         if(this.value.length >= 1){
+            input_el = Metro.getPlugin("#ingredientInputBox",'input');
             $.get("/ingredients?q=" + this.value, function(ingredients){
                 console.log(ingredients);
                 input_el.autocomplete = ingredients;
