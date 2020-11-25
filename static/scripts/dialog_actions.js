@@ -2,14 +2,17 @@
 function addEventListeners(){
     $("#openPrepDialog").click(function(event){
         Metro.dialog.open('#prepsDialogBox');
+        $("#prepInputBox").focus();
     });
 
     $("#openIngredientDialog").click(function(event){
         Metro.dialog.open('#ingredientsDialogBox');
+        $("#ingredientInputBox").focus();
     });
 
     $("#openRecipeStepDialog").click(function(event){
         Metro.dialog.open('#stepsDialogBox');
+        $("#stepsInputBox").focus();
     });
 
 
@@ -29,11 +32,26 @@ function addEventListeners(){
         add_recipe_step();
     });
 
+    $("#prepInputBox").keyup(function(event){
+        if (event.keyCode === 13) {
+            add_prep_step();
+        }
+    });
+
     $("#ingredientInputBox").keyup(function(event){
         if (event.keyCode === 13) {
-            console.log("Enter is pressed, should 'submit' the ingredient")
+            check_ingredient(
+                success_callback=add_ingredient,
+                failure_callback=handle_error
+            );
         }
         autoCompleteIngredients(this);
+    });
+
+    $("#stepsInputBox").keyup(function(event){
+        if (event.keyCode === 13) {
+            add_recipe_step();
+        }
     });
 }
 
