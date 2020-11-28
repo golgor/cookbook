@@ -33,7 +33,7 @@ def add_recipies():
         print(f"Prep_input: {request.form.getlist('prep_input')}")
         print(f"Ingredient_input: {request.form.getlist('ingredient_input')}")
         print(f"Recipe steps: {request.form.getlist('recipe_steps_list')}")
-    return render_template("add_recipe_v2.html")
+    return render_template("add_recipe.html")
 
 
 @app.route('/ingredients/list')
