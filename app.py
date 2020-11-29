@@ -26,13 +26,15 @@ def add_recipies():
     """Route to add recipes to the database.
     """
     if request.method == 'POST':
-        print(f"Heading: {request.form.get('title')}")
-        print(f"Difficulty: {request.form.get('difficulty')}")
-        print(f"Taste: {request.form.get('taste')}")
-        print(f"Time: {request.form.get('time')}")
-        print(f"Prep_input: {request.form.getlist('prep_input')}")
-        print(f"Ingredient_input: {request.form.getlist('ingredient_input')}")
-        print(f"Recipe steps: {request.form.getlist('recipe_steps_list')}")
+        db.add_recipe(
+            name=request.form.get('title'),
+            difficulty=request.form.get('difficulty'),
+            taste=request.form.get('taste'),
+            time=request.form.get('time'),
+            preps=request.form.getlist('prep_input'),
+            steps=request.form.getlist('recipe_steps_list'),
+            ingredients=request.form.getlist('ingredient_input')
+        )
     return render_template("add_recipe.html")
 
 
