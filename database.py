@@ -10,104 +10,201 @@ _all_ = [
 
 
 def insert_ingredient(name, ingredient_type, note):
-    with sqlite3.connect('cookbook.db') as conn:
-        c = conn.cursor()
-        c.execute(
-            "INSERT INTO ingredient (name, type, note) VALUES (?, ?, ?)",
-            (name, ingredient_type, note)
-        )
+    """Inserting a new ingredient in the ingredient table.
+
+    Args:
+        name (str): The name of the ingredient.
+        ingredient_type (str): The kind of ingredient.
+        note (str): A special note to add.
+    """
+    insert(table="ingredient", name=name, type=ingredient_type, note=note)
 
 
 def get_ingredients_from_db():
-    with sqlite3.connect('cookbook.db') as conn:
-        c = conn.cursor()
-        ingredients_list = c.execute(
-            "SELECT * FROM ingredient")
+    """Get all entries in the ingredient table.
 
+    Returns:
+        list: A list with a dict (json) for each row.
+    """
+    ingredients_list = select(table="ingredient")
     labels = ["id", "name", "type", "note"]
     ingredients = [
         dict(zip(labels, data))
         for data
-        in ingredients_list.fetchall()
+        in ingredients_list
     ]
     return ingredients
 
 
 def get_ingredient_subset_from_db(query):
-    with sqlite3.connect('cookbook.db') as conn:
-        c = conn.cursor()
-        ingredients_list = c.execute(
-            "SELECT name FROM ingredient WHERE name LIKE ?",
-            ["%" + query + "%"]
-        )
+    """Search for a name that contains "query". For example it can be
+    used to give autocomplete suggestions in a searchbox.
+
+    Args:
+        query (str): A string to search for in the database.
+
+    Returns:
+        list: Returns a list of matches for the given query.
+    """
+    ingredients_list = select(
+        table="ingredient", columns=("name",), name=query, exact_match=False
+    )
     return [ingredient[0] for ingredient in ingredients_list]
 
 
 def check_ingredient_from_db(query):
-    print(f"Query in function: {query}")
-    with sqlite3.connect('cookbook.db') as conn:
-        c = conn.cursor()
-        ingredient = c.execute(
-            "SELECT name FROM ingredient WHERE name LIKE ?",
-            [query]
-        ).fetchone()
+    """Check if an ingredient by the name stored in "query" is in the database.
+
+    Args:
+        query (str): The name of the ingredient to look for.
+
+    Returns:
+        Bool: Returns True if the ingredient is found, False otherwise.
+    """
+    ingredient = select(table="ingredient", name=query)
     if ingredient:
         return True
     else:
         return False
 
 
-# Heading: Title
-# Difficulty: 1
-# Taste: 2
-# Time: 00:01:00
-# Prep_input: ['{"text":"sätt på ugenn"}', '{"text":"tjosan"}']
-# Ingredient_input: ['{"name":"Mjölk","amount":2,"unit":"l"}', '{"name":"Potatis","amount":2,"unit":"l"}']
-# Recipe steps: ['{"text":"koka potatis"}', '{"text":"ät potatisen"}']
-
-
 def add_recipe(name: str, difficulty: int, taste: int, time: str,
                preps: list, steps: list, ingredients: list):
-    # Skapar tom dict dit jag lägger all text
-    text = {}
-    ingredient_dict = {}
+    # Create preps and steps as a dict.
+    # Intention to export to JSON and store as text.
+    text = {
+        "preps": [json.loads(prep) for prep in preps],
+        "steps": [json.loads(step) for step in steps]
+    }
 
-    # Skapar preps och avkodar JSON för att skapa en dict i python
-    text["preps"] = [json.loads(prep) for prep in preps]
-    text["steps"] = [json.loads(step) for step in steps]
+    # Insert a new recipe into the recipe table.
+    insert(
+        table="recipe",
+        name=name,
+        steps=json.dumps(text, ensure_ascii=False),
+        difficulty=difficulty,
+        taste=taste,
+        time=time
+    )
 
-    # Kodar i JSON igen för att lagra som text i databasen
-    json_text = json.dumps(text, ensure_ascii=False)
+    # Get the id of the added recipe. To be used when adding ingredients
+    # in ingredients_list table.
+    # [0][0] due to fetchall that returns list of tuples.
+    recipe_id = select(
+        table="recipe", columns=("id",), single_match=True, name=name
+    )
 
-    # Insert into recipe database.
-    with sqlite3.connect('cookbook.db') as conn:
-        c = conn.cursor()
-        c.execute(
-            "INSERT INTO recipe (name, steps, difficulty, taste, time) \
-                VALUES (?, ?, ?, ?, ?)",
-            (name, json_text, difficulty, taste, time)
-        )
-
-        # Get the id from the newly added recipe
-        id = c.execute(
-            "SELECT id FROM recipe WHERE name = ?",
-            (name,)
-        ).fetchone()
-
-    ingredient_dict["ingredients"] = [
+    # Loads the ingredients
+    # from: a list with json strings
+    # to: a list with dicts, one for each ingredient.
+    ingredient_list = [
         json.loads(ingredient) for ingredient in ingredients
     ]
 
-    # Creating a list with all ingredient and add the id. Same order as ingredients in ingredient_list table. !!!! Change name with ingredient_id !!!!
-    ingredient_list = [(*id, ing["name"], ing["amount"], ing["unit"]) for ing in ingredient_dict["ingredients"]]
+    # Creating a list with all ingredients and add the id.
+    # Same order as ingredients in ingredient_list table.
+    ingredient_list = [
+        (
+            recipe_id,
+            select(
+                table="ingredient",
+                columns=("id",),
+                name=ingredient["name"],
+                single_match=True
+            ),
+            ingredient["amount"],
+            ingredient["unit"]
+        )
+        for ingredient
+        in ingredient_list
+    ]
 
-    # Write to the database.
+    # Insert an entry into ingredient list
+    for recipe_id, ingredient_id, amount, unit in ingredient_list:
+        insert(
+            table="ingredient_list",
+            recipe_id=recipe_id,
+            ingredient_id=ingredient_id,
+            amount=amount,
+            unit=unit
+        )
+
+
+def insert(table, **kwargs):
+    """Insert an entry into a specific table.
+
+    Args:
+        table (str): [description]
+        kwargs (*): Each "key:value"-pair is a "column:value"
+    """
+    keys = list(kwargs.keys())
+    values = list(kwargs.values())
+
+    columns = "(" + ", ".join(keys) + ")"
+    placeholders = "(" + ", ".join(["?"]*len(keys)) + ")"
+    query_string = f"INSERT INTO {table} {columns} VALUES {placeholders}"
+
     with sqlite3.connect('cookbook.db') as conn:
         c = conn.cursor()
-        c.executemany(
-            "INSERT INTO ingredient_list VALUES (?, ?, ?, ?)",
-            ingredient_list
-        )
+        c.execute(query_string, values)
+
+
+def select(table, columns=None, exact_match=True, single_match=False, **kwargs):
+    """Running a select query against a specific table.
+
+    Kwargs is used as a filter. This function can only handle one filter
+    variable and the query is built as 'WHERE key LIKE value'.
+
+    Examples:
+        select(table="ingredient"):
+            SELECT * FROM ingredient
+        select(table="ingredient", columns=("id",)):
+            SELECT id FROM ingredient
+        select(table="ingredient", name="Morot"):
+            SELECT * FROM ingredient WHERE name LIKE "Morot"
+
+    Args:
+        table (str): Name of the table to query
+        columns (tuple), optional): A tuple of the columns to return.
+            If none, assumes *.
+
+    Returns:
+        list: A list with tuples, containing all the matches.
+    """
+    if len(kwargs) > 1:
+        print("Only one keyword value is accepted.")
+        return False
+
+    if columns:
+        columns_query = ", ".join(columns)
+    else:
+        columns_query = "*"
+
+    query_string = f"SELECT {columns_query} FROM {table}"
+
+    if kwargs:
+        key = list(kwargs.keys())[0]
+        if exact_match:
+            value = list(kwargs.values())[0]
+        else:
+            # Wildcard placeholder for sql query added ('%').
+            # Only makes sense with strings.
+            value = "%" + str(list(kwargs.values())[0]) + "%"
+
+        query_string += f" WHERE {key} LIKE ?"
+        with sqlite3.connect('cookbook.db') as conn:
+            c = conn.cursor()
+            ret = c.execute(query_string, (value,)).fetchall()
+    else:
+        with sqlite3.connect('cookbook.db') as conn:
+            c = conn.cursor()
+            ret = c.execute(query_string).fetchall()
+
+    # Extract the first element as long as ret is a iterable if requested.
+    if single_match:
+        while hasattr(ret, '__iter__'):
+            ret = ret[0]
+    return ret
 
 
 def main():
