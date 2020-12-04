@@ -18,7 +18,13 @@ def index():
 def list_recipies():
     """Route to list all recipies in the database in a list/table.
     """
-    return render_template("list_recipies.html")
+    return render_template(
+        "list_recipies.html",
+        recipies=db.select(
+            "recipe",
+            columns=("id", "name", "difficulty", "taste", "time")
+        )
+    )
 
 
 @app.route('/recipes/add', methods=['GET', 'POST'])

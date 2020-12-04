@@ -1,13 +1,6 @@
 import sqlite3
 import json
 
-_all_ = [
-    "insert_ingredient",
-    "get_ingredients_from_db",
-    "get_ingredient_subset_from_db",
-    "check_ingredient_from_db"
-]
-
 
 def insert_ingredient(name, ingredient_type, note):
     """Inserting a new ingredient in the ingredient table.
@@ -149,7 +142,8 @@ def insert(table, **kwargs):
         c.execute(query_string, values)
 
 
-def select(table, columns=None, exact_match=True, single_match=False, **kwargs):
+def select(table, columns=None, exact_match=True,
+           single_match=False, **kwargs):
     """Running a select query against a specific table.
 
     Kwargs is used as a filter. This function can only handle one filter

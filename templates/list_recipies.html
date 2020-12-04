@@ -5,8 +5,37 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Recipies</h1>
-    <p>
-        This is the first part where all {{ heading }} is listed.
-    </p>
+<div class="grid">
+    <div class="row">
+        <div class="cell">
+            <h1 class="text-center">All Recipies</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <table class="table" data-role="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Difficulty</th>
+                        <th>Taste</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipies %}
+                    <tr>
+                        <td>{{ recipe[0] }}</td>
+                        <td>{{ recipe[1] }}</td>
+                        <td>{{ recipe[2] }}</td>
+                        <td>{{ recipe[3] }}</td>
+                        <td>{{ recipe[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
