@@ -5,26 +5,35 @@
 {% endblock %}
 
 {% block main %}
-    <h1 class="text-color">Ingredients</h1>
-    <p>
-        This is the first part where all ingredients is listed.
-    </p>
-    <table class="table" data-role="table">
-        <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Note</th>
-        </thead>
-        <tbody>
-            {% for ingredient in ingredients %}
-            <tr>
-                <td>{{ ingredient["id"] }}</td>
-                <td>{{ ingredient["name"] }}</td>
-                <td>{{ ingredient["type"] }}</td>
-                <td>{{ ingredient["note"] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="grid">
+    <div class="row">
+        <div class="cell">
+            <h1 class="text-center">All ingredients</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <table class="table" data-role="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients %}
+                    <tr>
+                        <td>{{ ingredient["id"] }}</td>
+                        <td>{{ ingredient["name"] }}</td>
+                        <td>{{ ingredient["type"] }}</td>
+                        <td>{{ ingredient["note"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
