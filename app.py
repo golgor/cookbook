@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect
 import database as db
+import json
 
 
 app = Flask(__name__)
@@ -90,9 +91,29 @@ def add_ingredients():
 def show_recipe():
     recipe_id = request.args.get("id")
     if recipe_id:
-        # TODO: Get data from recipe with id=recipe_id
+        recipe = db.select(
+            "recipe",
+            columns=("name", "steps", "difficulty", "taste", "time"),
+            id=recipe_id
+        )[0]
+        name = recipe[0]
+
+        # Deserialize string into a dict.
+        text = json.loads(recipe[1])
+
+        # Create a simple list with all steps for preps and steps
+        prep = [prep["text"] for prep in text["preps"]]
+        steps = [step["text"] for step in text["steps"]]
+
+        difficulty = recipe[2]
+        taste = recipe[3]
+        time = recipe[4]
+
+        # TODO: Fetch all ingredients from ingredientslist
         # TODO: Send data to html with render template
-        print(recipe_id)
+        for string in [recipe_id, name, prep, steps, difficulty, taste, time]:
+            print(f"Type: {type(string)}, Value: {string}")
+
         return render_template("recipe.html")
     else:
         return render_template("index.html")
