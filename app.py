@@ -111,8 +111,10 @@ def show_recipe():
         time = recipe[4]
 
         # Get all ingredients for the specific recipe
-        ingredients = db.get_ingredients(recipe_id)
-
+        ingredients = [
+            list(ingredient)
+            for ingredient
+            in db.get_ingredients(recipe_id)]
         # TODO: Send data to html with render template
         for string in [recipe_id, name, preps, steps, difficulty, taste, time]:
             print(f"Type: {type(string)}, Value: {string}")
