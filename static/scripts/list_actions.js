@@ -68,10 +68,10 @@ function get_text_and_clear(id){
     return text;
 }
 
-steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh"]
 
 function create_heading_tag(size="h1", step){
+    steps_array = ["First", "Second", "Third", "Fourth", "Fift", "Sixth", "Seventh", "Eighth", "Nineth", "Tenth", "Eleventh"]
     heading = document.createElement(size);
-    heading.textContent = steps_array[step] + " step";
+    heading.innerHTML = steps_array[step] + " step";
     return heading;
 }
