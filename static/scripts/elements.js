@@ -1,10 +1,8 @@
 // This file contains all scripts used to create the different elements used, mostly while adding to lists
 
-function create_list_item(children){
+function create_list_item(children, remove_button=true){
     // Creating a list item
     let element = document.createElement("li");
-
-    console.log(children);
 
     children.forEach(child => {
         class_name = Object.keys(child)[0];
@@ -15,9 +13,11 @@ function create_list_item(children){
                 text = text
             )
         );
-        element.appendChild(
-            create_remove_button()
-        );
+        if (remove_button === true){
+            element.appendChild(
+                create_remove_button()
+            );
+        }
     });
 
     return element;
