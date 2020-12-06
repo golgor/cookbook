@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 import database as db
 
 
@@ -86,18 +86,25 @@ def add_ingredients():
     return render_template("add_ingredient.html")
 
 
+@app.route('/recipes')
+def show_recipe():
+    recipe_id = request.args.get("id")
+    if recipe_id:
+        # TODO: Get data from recipe with id=recipe_id
+        # TODO: Send data to html with render template
+        print(recipe_id)
+        return render_template("recipe.html")
+    else:
+        return render_template("index.html")
+
+
 @app.route('/random')
 def randomize():
     """Route to randomize and show a specific recipe.
-    """
-    return render_template("recipe.html")
 
-
-@app.route('/test')
-def test():
-    """Route for testing purposes during development.
+    TODO: Add random number generator and change redirect accordingly.
     """
-    return render_template("recipe.html")
+    return redirect("/recipes?id=1")
 
 
 if __name__ == '__main__':

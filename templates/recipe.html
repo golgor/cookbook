@@ -1,100 +1,78 @@
-{% extends "recipe_layout.html" %}
+{% extends "base_layout.html" %}
 
-<!-- Title of the page -->
+{% block base_top_scripts %}
+
+{% endblock %}
+
 {% block title %}
-    Test
+    Show recipe
 {% endblock %}
 
-<!-- Picture of the food! -->
-{% block image %}
-    Sätter en fin bild här
+{% block main %}
+<form action="/recipes/add" method="post" id="ingredientForm">
+    <div class="grid">
+        <!-- Heading -->
+        <div class="row">
+            <div class="cell">
+                <h1 class="text-center">Recipe heading</h1>
+            </div>
+        </div>
+        <!-- Middle row with inputs -->
+        <div class="row">
+            <!-- Left side, difficulty, taste and time and steps -->
+            <div class="cell">
+                <!-- difficulty, taste and time indicators -->
+                <div class="row">
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="difficulty">
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Taste</label>
+                            <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="taste">
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="form-group">
+                            <label>Time</label>
+                            <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell">
+                        <h1 class="text-center">Recipe steps</h1>
+                        <ul id="recipeStepList" class="step-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side with preps and ingredients -->
+            <div class="cell">
+                <div class="row">
+                    <div class="cell">
+                        <h1 class="text-center">Preparations</h1>
+                        <ul id="prep_ul" class="items-list">
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell">
+                        <h1 class="text-center">Ingredients</h1>
+                        <ul id="ingredient_ul" class="items-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 {% endblock %}
 
-<!-- Main heading of a recipe page -->
-{% block main_heading %}
-    <h2>
-        Blomkålspaj med broccoligratäng och köttfärsbullar
-    </h2>
-{% endblock %}
-
-<!-- 
-Row with items for how tasty, how difficult the recipe was. Note <li>!
--->
-{% block summary_row %}
-    <ul class="group-list horizontal">
-        <li>Taste</li>
-        <li>Difficulty</li>
-        <li>Time</li>
-    </ul>
-{% endblock %}
-
-<!-- 
-Short information about the recipe, will be just under the summary_row
--->
-{% block short_info %}
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-{% endblock %}
-
-<!-- 
-Preparation cell, to the left of the recipe.
--->
-{% block prep %}
-    <h5 class="text-center">Prep</h5>
-    <ul>
-        <li>Sätt ungen på 230 grader</li>
-        <li>Ta fram köttfärsen dagen innan</li>
-    </ul>
-{% endblock %}
-
-<!-- 
-List with ingredients
--->
-{% block ingredients %}
-    <h5 class="text-center">Ingredients</h5>
-    <ul>
-        <li>Test</li>
-        <li>Supertest</li>
-    </ul>
-{% endblock %}
-
-<!-- 
-List with all the steps that needs to be done.
--->
-{% block step_list %}
-<ul class="step-list">
-    <li>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type
-        specimen book.
-    </li>
-    <li>
-        Contrary to popular belief, Lorem Ipsum is not simply random text.
-        It has roots in a piece of classical Latin literature from 45 BC,
-        making it over 2000 years old.
-    </li>
-    <li>
-        There are many variations of passages of Lorem Ipsum available,
-        but the majority have suffered alteration in some form, by injected
-        humour, or randomised words which don't look even slightly believable.
-        If you are going to use a passage of Lorem Ipsum, you need to be sure
-        there isn't anything embarrassing hidden in the middle of text.
-    </li>
-    <li>
-        There are many variations of passages of Lorem Ipsum available,
-        but the majority have suffered alteration in some form, by injected
-        humour, or randomised words which don't look even slightly believable.
-        If you are going to use a passage of Lorem Ipsum, you need to be sure
-        there isn't anything embarrassing hidden in the middle of text.
-    </li>
-</ul>
-{% endblock %}
-
-<!-- 
-Scripts!
--->
-{% block scripts %}
+{% block base_bottom_scripts %}
 
 {% endblock %}
