@@ -5,8 +5,8 @@ function create_list_item(children, remove_button=true){
     let element = document.createElement("li");
 
     children.forEach(child => {
-        class_name = Object.keys(child)[0];
-        text = Object.values(child)[0];
+        let class_name = Object.keys(child)[0];
+        let text = Object.values(child)[0];
         element.appendChild(
             create_span(
                 span_class = class_name,
@@ -24,7 +24,7 @@ function create_list_item(children, remove_button=true){
 }
 
 function create_remove_button(){
-    remove_button = create_span("second-action fas fa-times fg-red");
+    let remove_button = create_span("second-action fas fa-times fg-red");
     remove_button.onclick = function() { this.parentElement.remove() };
     return remove_button;
 }
@@ -32,7 +32,7 @@ function create_remove_button(){
 
 // Hidden input
 function create_hidden_input(name, value){
-    input = document.createElement('input');
+    let input = document.createElement('input');
     input.type = "hidden";
     input.name = name;
     input.value = value;

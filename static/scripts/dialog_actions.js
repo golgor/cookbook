@@ -58,9 +58,8 @@ function addEventListeners(){
 // Autocomplete function for the input field in the #ingredientsDialogBox
 function autoCompleteIngredients(inputField){
     if(inputField.value.length >= 1){
-        input_el = Metro.getPlugin("#ingredientInputBox",'input');
+        let input_el = Metro.getPlugin("#ingredientInputBox",'input');
         $.get("/ingredients?q=" + inputField.value, function(ingredients){
-            console.log(ingredients);
             input_el.autocomplete = ingredients;
         })
     }
@@ -68,7 +67,7 @@ function autoCompleteIngredients(inputField){
 
 // Used to verify that an ingredient exists in the database just before adding it to the recipe.
 function check_ingredient(success_callback, failure_callback){
-    ingredient_name = $("#ingredientInputBox").val();
+    let ingredient_name = $("#ingredientInputBox").val();
     // Get request send to the backend to check if the ingredient exists in the database. The response is a Bool.
     $.ajax({
         method: "GET",
