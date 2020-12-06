@@ -8,58 +8,61 @@
     Show recipe
 {% endblock %}
 
+{% block heading %}
+<h1 class="text-center">{{ name }}</h1>
+{% endblock %}
+
 {% block main %}
-<div class="grid">
-    <!-- Heading -->
-    <div class="row">
-        <div class="cell">
-            <h1 class="text-center">{{ name }}</h1>
-        </div>
-    </div>
-    <!-- Middle row with inputs -->
-    <div class="row">
-        <!-- Left side, difficulty, taste and time and steps -->
-        <div class="cell">
-            <!-- difficulty, taste and time indicators -->
-            <div class="row">
+<!-- Middle row with inputs -->
+<div class="row">
+    <!-- Left side, difficulty, taste and time and steps -->
+    <div class="cell">
+        <!-- difficulty, taste and time indicators -->
+        <div class="d-flex flex-row flex-justify-center">
+            <div class="d-flex px-10">
                 <div class="cell">
                     <label>Difficulty</label>
                     <div id="difficulty"></div>
                 </div>
+            </div>
+            <div class="d-flex px-10">
                 <div class="cell">
                     <label>Taste</label>
                     <div id="taste"></div>
                 </div>
+            </div>
+            <div class="d-flex px-10">
                 <div class="cell">
                     <label>Time</label>
                     <div id="time"></div>
                 </div>
             </div>
-            <div class="row">
-                <div class="cell">
-                    <ul id="recipeStepList" class="step-list">
-                    </ul>
-                </div>
-            </div>
         </div>
-        <!-- Right side with preps and ingredients -->
-        <div class="cell">
-            <div class="row">
-                <div class="cell">
-                    <h1 class="text-center">Preparations</h1>
-                    <ul id="prep_ul" class="items-list">
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="cell">
-                    <h1 class="text-center">Ingredients</h1>
-                    <ul id="ingredient_ul" class="items-list">
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="cell">
+                <ul id="recipeStepList" class="step-list">
+                </ul>
             </div>
         </div>
     </div>
+    <!-- Right side with preps and ingredients -->
+    <div class="cell border-left border-size-2 bd-red">
+        <div class="row">
+            <div class="cell">
+                <h1 class="text-center">Preparations</h1>
+                <ul id="prep_ul" class="items-list">
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell">
+                <h1 class="text-center">Ingredients</h1>
+                <ul id="ingredient_ul" class="items-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

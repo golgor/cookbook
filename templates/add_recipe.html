@@ -8,15 +8,13 @@
     Add recipe
 {% endblock %}
 
+{% block heading %}
+<h1 class="text-center">Add a new recipe</h1>
+{% endblock %}
+
 {% block main %}
 <form action="/recipes/add" method="post" id="ingredientForm">
     <div class="grid">
-        <!-- Heading -->
-        <div class="row">
-            <div class="cell">
-                <h1 class="text-center">Add a new ingredient</h1>
-            </div>
-        </div>
         <!-- Middle row with inputs -->
         <div class="row">
             <!-- All inputs -->

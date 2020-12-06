@@ -4,8 +4,11 @@
     Add ingredient
 {% endblock %}
 
+{% block heading %}
+<h1 class="text-center">Add a new ingredient</h1>
+{% endblock %}
+
 {% block main %}
-    <h1 class="text-center">Add a new ingredient</h1>
     <div class="d-flex flex-justify-center">
         <form action="/ingredients/add" method="post">
             <div class="form-group" style="max-width: 280px">

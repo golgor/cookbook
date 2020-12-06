@@ -21,32 +21,43 @@
         {% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
-    <body class="carolina-blue">
+    <body class="ribbed-red">
         {#
             This is the header menu that will let you access all pages.
         #}
-        <ul class="h-menu middle-yellow-red">
-            <li><a href="/">Home</a></li>
-            <li><a href="#" class="dropdown-toggle">Recipies</a>
-                <ul class="d-menu" data-role="dropdown">
-                    <li><a href="/recipies/list">Show all</a></li>
-                    <li><a href="/recipes/add">Add new</a></li>
+        <header class="app-bar bg-red fg-white app-bar-expand" data-role="appbar" data-expand-point="md" style="box-shadow:rgba(0, 0, 0, 0.3) -4px 8px 4px 0px">
+            <div class="app-bar-container mx-auto">
+                <ul class="app-bar-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="#" class="dropdown-toggle">Recipies</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="/recipies/list">Show all</a></li>
+                        <li><a href="/recipes/add">Add new</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="dropdown-toggle">Ingredients</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a href="/ingredients/list">Show all</a></li>
+                        <li><a href="/ingredients/add">Add new</a></li>
+                    </ul>
+                </li>
+                <li><a href="/random">Randomize</a></li>
                 </ul>
-            </li>
-            <li><a href="#" class="dropdown-toggle">Ingredients</a>
-                <ul class="d-menu" data-role="dropdown">
-                    <li><a href="/ingredients/list">Show all</a></li>
-                    <li><a href="/ingredients/add">Add new</a></li>
-                </ul>
-            </li>
-            <li><a href="/random">Randomize</a></li>
-        </ul>
+            </div>
+        </header>
         {#
-            This is a centered cell where the 'main' content will be located.
+            This is a centered cell where the 'main' content will be located. rgb(228, 228, 228)
         #}
-        <div>
-            <div class="container main">
-                {% block main %}{% endblock %}
+        <div class="container">
+            <div class="row mt-20 mb-5" style="box-shadow:rgba(0, 0, 0, 0.3) -4px 8px 4px 0px">
+                <div class="cell text-center bg-lightGray fg-red">
+                    {% block heading %}{% endblock %}
+                </div>
+            </div>
+            <div class="row" style="box-shadow:rgba(0, 0, 0, 0.3) -4px 8px 4px 0px">
+                <div class="cell py-5 px-10 bg-lightGray fg-black">
+                    {% block main %}{% endblock %}
+                </div>
             </div>
         </div>
         <!-- Metro 4 -->
