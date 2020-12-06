@@ -9,70 +9,73 @@
 {% endblock %}
 
 {% block main %}
-<form action="/recipes/add" method="post" id="ingredientForm">
-    <div class="grid">
-        <!-- Heading -->
-        <div class="row">
-            <div class="cell">
-                <h1 class="text-center">Recipe heading</h1>
+<div class="grid">
+    <!-- Heading -->
+    <div class="row">
+        <div class="cell">
+            <h1 class="text-center">{{ name }}</h1>
+        </div>
+    </div>
+    <!-- Middle row with inputs -->
+    <div class="row">
+        <!-- Left side, difficulty, taste and time and steps -->
+        <div class="cell">
+            <!-- difficulty, taste and time indicators -->
+            <div class="row">
+                <div class="cell">
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="difficulty">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="form-group">
+                        <label>Taste</label>
+                        <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="taste">
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="cell">
+                    <h1 class="text-center">Recipe steps</h1>
+                    <ul id="recipeStepList" class="step-list">
+                    </ul>
+                </div>
             </div>
         </div>
-        <!-- Middle row with inputs -->
-        <div class="row">
-            <!-- Left side, difficulty, taste and time and steps -->
-            <div class="cell">
-                <!-- difficulty, taste and time indicators -->
-                <div class="row">
-                    <div class="cell">
-                        <div class="form-group">
-                            <label>Difficulty</label>
-                            <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="difficulty">
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="form-group">
-                            <label>Taste</label>
-                            <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="taste">
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <div class="form-group">
-                            <label>Time</label>
-                            <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="cell">
-                        <h1 class="text-center">Recipe steps</h1>
-                        <ul id="recipeStepList" class="step-list">
-                        </ul>
-                    </div>
+        <!-- Right side with preps and ingredients -->
+        <div class="cell">
+            <div class="row">
+                <div class="cell">
+                    <h1 class="text-center">Preparations</h1>
+                    <ul id="prep_ul" class="items-list">
+                    </ul>
                 </div>
             </div>
-            <!-- Right side with preps and ingredients -->
-            <div class="cell">
-                <div class="row">
-                    <div class="cell">
-                        <h1 class="text-center">Preparations</h1>
-                        <ul id="prep_ul" class="items-list">
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="cell">
-                        <h1 class="text-center">Ingredients</h1>
-                        <ul id="ingredient_ul" class="items-list">
-                        </ul>
-                    </div>
+            <div class="row">
+                <div class="cell">
+                    <h1 class="text-center">Ingredients</h1>
+                    <ul id="ingredient_ul" class="items-list">
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 {% endblock %}
 
 {% block base_bottom_scripts %}
-
+<script>
+    difficulty = {{ difficulty }};
+    taste = {{ taste }};
+    time = "{{ time }}";
+    console.log(difficulty, taste, time);
+</script>
 {% endblock %}

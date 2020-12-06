@@ -123,6 +123,17 @@ def add_recipe(name: str, difficulty: int, taste: int, time: str,
         )
 
 
+def get_ingredients(recipe_id):
+    with sqlite3.connect('cookbook.db') as conn:
+        c = conn.cursor()
+        ret = c.execute(
+            "SELECT name, amount, unit FROM ingredient_list \
+            JOIN ingredient ON ingredient_id = id \
+            WHERE recipe_id = ?", (recipe_id,)
+        ).fetchall()
+    return ret
+
+
 def insert(table, **kwargs):
     """Insert an entry into a specific table.
 
@@ -202,18 +213,7 @@ def select(table, columns=None, exact_match=True,
 
 
 def main():
-    add_recipe(
-        name="Title",
-        difficulty=1,
-        taste=2,
-        time="00:01:00",
-        preps=['{"text":"sätt på ugenn"}', '{"text":"tjosan"}'],
-        steps=['{"text":"koka potatis"}', '{"text":"ät potatisen"}'],
-        ingredients=[
-            '{"name":"Mjölk","amount":2,"unit":"l"}',
-            '{"name":"Potatis","amount":2,"unit":"l"}'
-        ]
-    )
+    pass
 
 
 if __name__ == '__main__':

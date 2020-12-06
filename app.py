@@ -91,6 +91,7 @@ def add_ingredients():
 def show_recipe():
     recipe_id = request.args.get("id")
     if recipe_id:
+        # Get all data from recipe table
         recipe = db.select(
             "recipe",
             columns=("name", "steps", "difficulty", "taste", "time"),
@@ -102,19 +103,30 @@ def show_recipe():
         text = json.loads(recipe[1])
 
         # Create a simple list with all steps for preps and steps
-        prep = [prep["text"] for prep in text["preps"]]
+        preps = [prep["text"] for prep in text["preps"]]
         steps = [step["text"] for step in text["steps"]]
 
         difficulty = recipe[2]
         taste = recipe[3]
         time = recipe[4]
 
-        # TODO: Fetch all ingredients from ingredientslist
+        # Get all ingredients for the specific recipe
+        ingredients = db.get_ingredients(recipe_id)
+
         # TODO: Send data to html with render template
-        for string in [recipe_id, name, prep, steps, difficulty, taste, time]:
+        for string in [recipe_id, name, preps, steps, difficulty, taste, time]:
             print(f"Type: {type(string)}, Value: {string}")
 
-        return render_template("recipe.html")
+        return render_template(
+            "recipe.html",
+            name=name,
+            preps=preps,
+            steps=steps,
+            difficulty=difficulty,
+            taste=taste,
+            time=time,
+            ingredients=ingredients
+        )
     else:
         return render_template("index.html")
 
