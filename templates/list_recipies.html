@@ -9,34 +9,32 @@
 {% endblock %}
 
 {% block main %}
-<div class="grid">
-    <div class="row">
-        <div class="cell">
-            <table class="table" data-role="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Difficulty</th>
-                        <th>Taste</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for recipe in recipies %}
-                    <tr>
-                        <!-- Create variable with URL to the specific recipe using GET-parameter id -->
-                        {% set recipe_url = "/recipes?id=" ~ recipe[0] %}
-                        <td>{{ recipe[0] }}</td>
-                        <td><a href={{ recipe_url }}>{{ recipe[1] }}</a></td>
-                        <td>{{ recipe[2] }}</td>
-                        <td>{{ recipe[3] }}</td>
-                        <td>{{ recipe[4] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="row">
+    <div class="cell">
+        <table class="table striped row-hover" data-role="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Difficulty</th>
+                    <th>Taste</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipies %}
+                <tr class="text-center">
+                    <!-- Create variable with URL to the specific recipe using GET-parameter id -->
+                    {% set recipe_url = "/recipes?id=" ~ recipe[0] %}
+                    <td>{{ recipe[0] }}</td>
+                    <td><a href={{ recipe_url }}>{{ recipe[1] }}</a></td>
+                    <td>{{ recipe[2] }}</td>
+                    <td>{{ recipe[3] }}</td>
+                    <td>{{ recipe[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

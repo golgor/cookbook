@@ -9,30 +9,28 @@
 {% endblock %}
 
 {% block main %}
-<div class="grid">
-    <div class="row">
-        <div class="cell">
-            <table class="table" data-role="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Note</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for ingredient in ingredients %}
-                    <tr>
-                        <td>{{ ingredient["id"] }}</td>
-                        <td>{{ ingredient["name"] }}</td>
-                        <td>{{ ingredient["type"] }}</td>
-                        <td>{{ ingredient["note"] }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="row">
+    <div class="cell">
+        <table class="table striped row-hover" data-role="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in ingredients %}
+                <tr>
+                    <td>{{ ingredient["id"] }}</td>
+                    <td>{{ ingredient["name"] }}</td>
+                    <td>{{ ingredient["type"] }}</td>
+                    <td>{{ ingredient["note"] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
