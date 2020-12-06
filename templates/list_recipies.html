@@ -26,8 +26,10 @@
                 <tbody>
                     {% for recipe in recipies %}
                     <tr>
+                        <!-- Create variable with URL to the specific recipe using GET-parameter id -->
+                        {% set recipe_url = "/recipes?id=" ~ recipe[0] %}
                         <td>{{ recipe[0] }}</td>
-                        <td>{{ recipe[1] }}</td>
+                        <td><a href={{ recipe_url }}>{{ recipe[1] }}</a></td>
                         <td>{{ recipe[2] }}</td>
                         <td>{{ recipe[3] }}</td>
                         <td>{{ recipe[4] }}</td>
