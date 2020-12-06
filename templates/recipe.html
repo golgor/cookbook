@@ -23,22 +23,16 @@
             <!-- difficulty, taste and time indicators -->
             <div class="row">
                 <div class="cell">
-                    <div class="form-group">
-                        <label>Difficulty</label>
-                        <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="difficulty">
-                    </div>
+                    <label>Difficulty</label>
+                    <div id="difficulty"></div>
                 </div>
                 <div class="cell">
-                    <div class="form-group">
-                        <label>Taste</label>
-                        <input type="text" data-role="spinner" data-min-value="1" data-max-value="5" name="taste">
-                    </div>
+                    <label>Taste</label>
+                    <div id="taste"></div>
                 </div>
                 <div class="cell">
-                    <div class="form-group">
-                        <label>Time</label>
-                        <input data-role="timepicker" data-seconds="false" data-value="00:00" name="time">
-                    </div>
+                    <label>Time</label>
+                    <div id="time"></div>
                 </div>
             </div>
             <div class="row">
@@ -77,16 +71,28 @@
 <script type="text/javascript">
     function add_ingredients(){
         let ingredients_array = {{ ingredients|safe }};
-        console.log("Ingredients: ");
-        console.log(ingredients_array);
+
+        for (let i = 0; i < ingredients_array.length; i++){
+            let name = ingredients_array[i][0];
+            let amount = ingredients_array[i][1];
+            let unit = ingredients_array[i][2];
+
+            let element = create_list_item(
+                [{"label":name}, {"second_label":amount + unit}],
+                remove_button=false
+            );
+            $("#ingredient_ul").append(element);
+        }
     }
 
     function add_steps(){
         let steps_array = {{ steps|safe }};
-        console.log(steps_array)
-        console.log(steps_array.length)
+
+        // Loop through the array and add to the UL-tag
         for (let i = 0; i < steps_array.length; i++){
             let element = document.createElement("li");
+
+            // Heading tag makes it looks nicer
             let heading = create_heading_tag("h1", i);
 
             let content = document.createElement("p");
@@ -102,12 +108,12 @@
     function add_preps(){
         // Create an array from the jinja parameter preps
         // Using safe-filter to make sure the data is not HTML-escaped.
-        preps_array = {{ preps|safe }};
+        let preps_array = {{ preps|safe }};
 
         // For each item in the array, add it to preps list.
-        // No remove-button should be used.
+        // No remove-button should be used as it should not be editable.
         preps_array.forEach(function(prep){
-            element = create_list_item(
+            let element = create_list_item(
                 [{"label":prep}],
                 remove_button=false
             );
@@ -116,11 +122,22 @@
     }
 
     function add_statusbar(){
-        difficulty = {{ difficulty|safe }};
-        taste = {{ taste|safe }};
-        time = "{{ time|safe }}";
-        console.log("Statuses: ");
-        console.log(difficulty, taste, time);
+        let difficulty = {{ difficulty|safe }};
+        let taste = {{ taste|safe }};
+        let time = "{{ time|safe }}";
+        
+        for (let i = 0; i < difficulty; i++){
+            let star = create_span("second-action fas fa-star fg-yellow");
+            $("#difficulty").append(star);
+        }
+
+        for (let i = 0; i < taste; i++){
+            let star = create_span("second-action fas fa-star fg-yellow");
+            $("#taste").append(star);
+        }
+
+        $("#time").text(time)
+
     }
 
     add_ingredients();
