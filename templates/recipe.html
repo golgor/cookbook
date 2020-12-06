@@ -73,9 +73,35 @@
 
 {% block base_bottom_scripts %}
 <script>
-    difficulty = {{ difficulty }};
-    taste = {{ taste }};
-    time = "{{ time }}";
-    console.log(difficulty, taste, time);
+    function add_ingredients(){
+        ingredients_array = {{ ingredients|safe }};
+        console.log("Ingredients: ");
+        console.log(ingredients_array);
+    }
+
+    function add_steps(){
+        steps_array = {{ steps|safe }};
+        console.log("Steps: ");
+        console.log(steps_array);
+    }
+
+    function add_preps(){
+        preps_array = {{ preps|safe }};
+        console.log("Preps: ");
+        console.log(preps_array);
+    }
+
+    function add_statusbar(){
+        difficulty = {{ difficulty|safe }};
+        taste = {{ taste|safe }};
+        time = "{{ time|safe }}";
+        console.log("Statuses: ");
+        console.log(difficulty, taste, time);
+    }
+
+    add_ingredients();
+    add_steps();
+    add_preps();
+    add_statusbar();
 </script>
 {% endblock %}
