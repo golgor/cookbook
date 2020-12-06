@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect
 import database as db
 import json
+import random
 
 
 app = Flask(__name__)
@@ -136,7 +137,9 @@ def randomize():
 
     TODO: Add random number generator and change redirect accordingly.
     """
-    return redirect("/recipes?id=1")
+    recipe_count = db.get_recipe_count()
+    recipe_id = random.randint(1, recipe_count)
+    return redirect(f"/recipes?id={recipe_id}")
 
 
 if __name__ == '__main__':

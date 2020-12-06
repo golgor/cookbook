@@ -134,6 +134,13 @@ def get_ingredients(recipe_id):
     return ret
 
 
+def get_recipe_count():
+    with sqlite3.connect('cookbook.db') as conn:
+        c = conn.cursor()
+        ret = c.execute("SELECT COUNT(*) FROM recipe").fetchone()[0]
+    return ret
+
+
 def insert(table, **kwargs):
     """Insert an entry into a specific table.
 
