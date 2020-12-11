@@ -52,7 +52,7 @@
                 <!-- Buttons for opening dialogs -->
                 <div class="row">
                     <div class="cell" style="display:flex;justify-content:center">
-                        <button type="button" class="button primary large" style="width: 8em;" id="openPrepDialog">Add prep</button>
+                        <button type="button" class="button primary large" style="width: 8em;" id="openTipDialog">Add tip</button>
                     </div>
                     <div class="cell" style="display:flex;justify-content:center">
                         <button type="button" class="button primary large" style="width: 8em;" id="openIngredientDialog">Add ingredient</button>
@@ -66,8 +66,8 @@
             <div class="cell">
                 <div class="row">
                     <div class="cell">
-                        <h1 class="text-center">Preparations</h1>
-                        <ul id="prep_ul" class="items-list">
+                        <h1 class="text-center">Tips</h1>
+                        <ul id="tip_ul" class="items-list">
                         </ul>
                     </div>
                 </div>
@@ -97,16 +97,16 @@
     </div>
 </form>
 
-<!-- Dialog for adding Preparatory steps -->
-<div class="dialog" data-role="dialog" id="prepsDialogBox">
-    <div class="dialog-title">Add new preparation step</div>
+<!-- Dialog for adding tips -->
+<div class="dialog" data-role="dialog" id="tipsDialogBox">
+    <div class="dialog-title">Add new tip</div>
     <div class="dialog-content">
         <div class="form-group">
-            <input type="text" data-role="input" id="prepInputBox" placeholder="Prep description">
+            <input type="text" data-role="input" id="tipInputBox" placeholder="Tip description">
         </div>
     </div>
     <div class="dialog-actions">
-        <button class="button" id="addPrepStepFromDialogBox">Add</button>
+        <button class="button" id="addTipFromDialogBox">Add</button>
         <button class="button primary js-dialog-close">Close</button>
     </div>
 </div>

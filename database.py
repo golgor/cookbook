@@ -62,11 +62,11 @@ def check_ingredient_from_db(query):
 
 
 def add_recipe(name: str, difficulty: int, taste: int, time: str,
-               preps: list, steps: list, ingredients: list):
-    # Create preps and steps as a dict.
+               tips: list, steps: list, ingredients: list):
+    # Create tips and steps as a dict.
     # Intention to export to JSON and store as text.
     text = {
-        "preps": [json.loads(prep) for prep in preps],
+        "tips": [json.loads(tip) for tip in tips],
         "steps": [json.loads(step) for step in steps]
     }
 

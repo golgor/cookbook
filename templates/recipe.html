@@ -45,12 +45,12 @@
             </div>
         </div>
     </div>
-    <!-- Right side with preps and ingredients -->
+    <!-- Right side with tips and ingredients -->
     <div class="cell border-left border-size-2 bd-red">
         <div class="row">
             <div class="cell">
-                <h1 class="text-center">Preparations</h1>
-                <ul id="prep_ul" class="items-list">
+                <h1 class="text-center">Tips</h1>
+                <ul id="tip_ul" class="items-list">
                 </ul>
             </div>
         </div>
@@ -108,19 +108,19 @@
         }
     }
 
-    function add_preps(){
-        // Create an array from the jinja parameter preps
+    function add_tips(){
+        // Create an array from the jinja parameter tips
         // Using safe-filter to make sure the data is not HTML-escaped.
-        let preps_array = {{ preps|safe }};
+        let tips_array = {{ tips|safe }};
 
-        // For each item in the array, add it to preps list.
+        // For each item in the array, add it to tips list.
         // No remove-button should be used as it should not be editable.
-        preps_array.forEach(function(prep){
+        tips_array.forEach(function(tip){
             let element = create_list_item(
-                [{"label":prep}],
+                [{"label":tip}],
                 remove_button=false
             );
-            $("#prep_ul").append(element);
+            $("#tip_ul").append(element);
         })
     }
 
@@ -145,7 +145,7 @@
 
     add_ingredients();
     add_steps();
-    add_preps();
+    add_tips();
     add_statusbar();
 </script>
 {% endblock %}

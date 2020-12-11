@@ -39,7 +39,7 @@ def add_recipies():
             difficulty=request.form.get('difficulty'),
             taste=request.form.get('taste'),
             time=request.form.get('time'),
-            preps=request.form.getlist('prep_input'),
+            tips=request.form.getlist('tip_input'),
             steps=request.form.getlist('recipe_steps_list'),
             ingredients=request.form.getlist('ingredient_input')
         )
@@ -103,8 +103,8 @@ def show_recipe():
         # Deserialize string into a dict.
         text = json.loads(recipe[1])
 
-        # Create a simple list with all steps for preps and steps
-        preps = [prep["text"] for prep in text["preps"]]
+        # Create a simple list with all steps for tips and steps
+        tips = [tip["text"] for tip in text["tips"]]
         steps = [step["text"] for step in text["steps"]]
 
         difficulty = recipe[2]
@@ -120,7 +120,7 @@ def show_recipe():
         return render_template(
             "recipe.html",
             name=name,
-            preps=preps,
+            tips=tips,
             steps=steps,
             difficulty=difficulty,
             taste=taste,

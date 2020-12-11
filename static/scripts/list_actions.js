@@ -21,17 +21,17 @@ function add_ingredient(){
     // To clear: unit_selector (set to liter (l)), amount_spinner (0)
 }
 
-function add_prep_step(){
-    let text = get_text_and_clear("prepInputBox");
+function add_tip_step(){
+    let text = get_text_and_clear("tipInputBox");
 
     let element = create_list_item([{"label":text}]);
     let val = {"text": text};
     let hidden_input = create_hidden_input(
-        name="prep_input",
+        name="tip_input",
         value=JSON.stringify(val)
     )
     element.appendChild(hidden_input);
-    $("#prep_ul").append(element);
+    $("#tip_ul").append(element);
 }
 
 function add_recipe_step(){

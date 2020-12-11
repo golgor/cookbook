@@ -1,8 +1,8 @@
 // This file contains all scripts used to handle the dialogs, including opening, closing, input validation.
 function addEventListeners(){
-    $("#openPrepDialog").click(function(event){
-        Metro.dialog.open('#prepsDialogBox');
-        $("#prepInputBox").focus();
+    $("#openTipDialog").click(function(event){
+        Metro.dialog.open('#tipsDialogBox');
+        $("#tipInputBox").focus();
     });
 
     $("#openIngredientDialog").click(function(event){
@@ -16,8 +16,8 @@ function addEventListeners(){
     });
 
 
-    $("#addPrepStepFromDialogBox").click(function(event){
-        add_prep_step();
+    $("#addtipstepFromDialogBox").click(function(event){
+        add_tip_step();
     });
 
     $("#addIngredientFromDialogBox").click(function(event){
@@ -32,9 +32,9 @@ function addEventListeners(){
         add_recipe_step();
     });
 
-    $("#prepInputBox").keyup(function(event){
+    $("#tipInputBox").keyup(function(event){
         if (event.keyCode === 13) {
-            add_prep_step();
+            add_tip_step();
         }
     });
 
