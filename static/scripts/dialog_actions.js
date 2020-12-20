@@ -16,7 +16,7 @@ function addEventListeners(){
     });
 
 
-    $("#addtipstepFromDialogBox").click(function(event){
+    $("#addTipFromDialogBox").click(function(event){
         add_tip_step();
     });
 
